@@ -1,17 +1,18 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "bundle_diff_linker/version"
+require "lock_diff/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "bundle_diff_linker"
-  spec.version       = BundleDiffLinker::VERSION
+  spec.name          = "lock_diff"
+  spec.version       = LockDiff::VERSION
   spec.authors       = ["vividmuimui"]
   spec.email         = ["vivid.muimui@gmail.com"]
 
   spec.summary       = %q{Generate links for Gemfile.lock's diff and post to PullRequest}
   spec.description   = %q{Generate links for Gemfile.lock's diff and post to PullRequest}
-  spec.homepage      = "https://github.com/vividmuimui/bundle_diff_linker"
+  # spec.homepage      = "https://github.com/vividmuimui/lock_diff"
+  spec.homepage      = ""
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
@@ -22,7 +23,12 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 2.4.0"
 
+  spec.add_dependency "octokit", "~> 4.0"
+  spec.add_dependency "httpclient"
+
   spec.add_development_dependency "bundler", "~> 1.15"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "pry"
+  spec.add_development_dependency "pry-byebug"
 end

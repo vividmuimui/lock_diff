@@ -1,15 +1,24 @@
-# BundleDiffLinker
+# LockDiff
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bundle_diff_linker`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![CircleCI](https://circleci.com/gh/vividmuimui/lock_diff.svg?style=svg)](https://circleci.com/gh/vividmuimui/lock_diff)
 
-TODO: Delete this and the text above, and describe your gem
+This Gem is generate `changelog url`, `github compare link` by lock file of Github pull request. And comment to pull request.
+
+Like as this.
+
+> https://github.com/vividmuimui/rails_tutorial/pull/26#issuecomment-312491272
+> ![image](https://user-images.githubusercontent.com/1803598/27770516-f5774972-5f7a-11e7-87a6-7c3cbf1de745.png)
+
+## Strategies
+
+- Gemfile.lock(Ruby/Bundler)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bundle_diff_linker'
+gem 'lock_diff'
 ```
 
 And then execute:
@@ -18,21 +27,40 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install bundle_diff_linker
+    $ gem install lock_diff
 
 ## Usage
 
-TODO: Write usage instructions here
+Require `GITHUB_ACCESS_TOKEN` environment.
+
+### Command line
+
+```sh
+$ lock_diff
+Usage: lock_diff [options]
+    -r, --repository=REPOSITORY      required. Like as rails/rails
+    -n, --number=PULL_REQUEST_NUMBER required
+        --post-comment=true or false dafault=false
+```
+
+```sh
+$ lock_diff -r "vividmuimui/rails_tutorial" -n 26 --post-comment=false
+```
+
+### Ruby
+
+```ruby
+require 'lock_diff'
+LockDiff.run(repository: "vividmuimui/rails_tutorial", number: 26, post_comment: false)
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+TODO:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bundle_diff_linker. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/lock_diff. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -40,4 +68,4 @@ The gem is available as open source under the terms of the [MIT License](http://
 
 ## Code of Conduct
 
-Everyone interacting in the BundleDiffLinker project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/bundle_diff_linker/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the LockDiff project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/lock_diff/blob/master/CODE_OF_CONDUCT.md).

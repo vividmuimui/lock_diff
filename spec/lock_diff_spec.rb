@@ -1,8 +1,8 @@
 require "spec_helper"
 
-RSpec.describe BundleDiffLinker do
+RSpec.describe LockDiff do
   it "has a version number" do
-    expect(BundleDiffLinker::VERSION).not_to be nil
+    expect(LockDiff::VERSION).not_to be nil
   end
 
   it "does something useful" do
