@@ -1,8 +1,10 @@
 module BundleDiffLinker
   class GemfileLockComparator
     def self.by(pull_request)
-      gemfile_lock = BundleDiffLinker::Github::GemfileLock.new(pull_request)
-      new(old_ver: gemfile_lock.old_ver, new_ver: gemfile_lock.new_ver)
+      new(
+        old_ver: pull_request.old_gemfile_lock,
+        new_ver: pull_request.new_gemfile_lock
+      )
     end
 
     def initialize(old_ver:, new_ver:)
