@@ -31,7 +31,16 @@ module BundleDiffLinker
       end
     end
 
-    # def initialize(github_access_token:, repository:, pull_request_number:)
-    # end
+    def run(repository:, pull_request_number:, with_comment: false)
+      pr = BundleDiffLinker::Github::PullRequest.new(repository: repository, number: pull_request_number)
+      return unless pr.bundle_updated?
+      gem_diffs = BundleDiffLinker::GemfileLockComparator.by(pr).compare
+      formatter = BundleDiffLinker::Formatter::GithubMarkdown.new(gem_diffs)
+      if with_comment
+        github_client.add_comment(repository, pull_request_number, formatter.format)
+      else
+        puts formatter.format
+      end
+    end
   end
 end
