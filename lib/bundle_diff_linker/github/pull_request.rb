@@ -31,7 +31,11 @@ module BundleDiffLinker
 
       def file_content(path, base_or_head)
         raise unless %i(head base).include? base_or_head.to_sym
-        @client.file_content(@repository, path: path, ref: pull_request.send(base_or_head).sha)
+        @client.file_content(
+          @repository,
+          path: path,
+          ref: pull_request.send(base_or_head).sha
+        )
       end
 
       def gemfile_lock_path

@@ -18,7 +18,7 @@ module BundleDiffLinker
         old_spec = old_specs_by_name[new_spec.name]&.first
         next unless old_spec
 
-        GemDiff.new(old_gem: GemInfo.new(new_spec), new_gem: GemInfo.new(old_spec))
+        GemDiff.new(old_gem: GemInfo.new(old_spec), new_gem: GemInfo.new(new_spec))
       end.compact.select(&:difference?)
     end
 
