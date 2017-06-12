@@ -3,9 +3,8 @@ require 'octokit'
 module BundleDiffLinker
   module Github
     class AccessToken < ::String
-      def initialize(string = nil)
-        string ||= ENV.fetch('GITHUB_ACCESS_TOKEN')
-        super(string)
+      def initialize(token = nil)
+        super(token || ENV.fetch('GITHUB_ACCESS_TOKEN'))
       end
     end
   end

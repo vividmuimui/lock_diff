@@ -1,9 +1,9 @@
 module BundleDiffLinker
   class GemfileLockComparator
-    def self.by(pull_request)
+    def self.by(pr_gemfile_lock)
       new(
-        old_ver: pull_request.old_gemfile_lock,
-        new_ver: pull_request.new_gemfile_lock
+        old_ver: pr_gemfile_lock.base_file,
+        new_ver: pr_gemfile_lock.head_file
       )
     end
 
