@@ -1,6 +1,6 @@
 module BundleDiffLinker
-  module Gemfile
-    class PrGemfileLock
+  module Gem
+    class PrLockfile
       def initialize(pull_request)
         @pr = pull_request
       end

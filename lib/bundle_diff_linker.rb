@@ -4,16 +4,8 @@ require "bundle_diff_linker/version"
 require "bundle_diff_linker/formatter/github_markdown"
 require "bundle_diff_linker/gem_diff"
 require "bundle_diff_linker/gem_info"
-require "bundle_diff_linker/gemfile/pr_gemfile_lock"
-require "bundle_diff_linker/gemfile_lock_comparator"
-require "bundle_diff_linker/github/access_token"
-require "bundle_diff_linker/github/change_log_url_finder"
-require "bundle_diff_linker/github/client"
-require "bundle_diff_linker/github/github_url_detector"
-require "bundle_diff_linker/github/pull_request"
-require "bundle_diff_linker/github/pull_request_content"
-require "bundle_diff_linker/github/repository_name_detector"
-require "bundle_diff_linker/github/tag_finder"
+require "bundle_diff_linker/gem"
+require "bundle_diff_linker/github"
 require "bundle_diff_linker/pull_request"
 require "bundle_diff_linker/ruby_gem"
 
@@ -48,11 +40,13 @@ module BundleDiffLinker
       # BundleDiffLinker.strategy = :bundler or :gemfile
 
       pr = PullRequest.new(repository: repository, number: pull_request_number)
-      pr_gemfile_lock = Gemfile::PrGemfileLock.new(pr)
-      return unless pr_gemfile_lock.updated?
+      # pr_gemfile_lock = Gem::PrGemfileLock.new(pr)
+      pr_lockfile = Gem.pr_lockfile(pr)
+      return unless pr_lockfile.updated?
 
-      gem_diffs = GemfileLockComparator.by(pr_gemfile_lock).compare
-      formatter = Formatter::GithubMarkdown.new(gem_diffs)
+      # gem_diffs = Gem::LockComparator.by(pr_lockfile).compare
+      lockfile_diffs = Gem.diffs(pr_lockfile)
+      formatter = Formatter::GithubMarkdown.new(lockfile_diffs)
       if with_comment
         github_client.add_comment(repository, pull_request_number, formatter.format)
       else
