@@ -20,9 +20,7 @@ module BundleDiffLinker
       def pull_request_content(repository, number, file_name)
         content = @client.pull_request_files(repository, number).
           find { |file| file.filename.include?(file_name) }
-        if content
-          Github::PullRequestContent.new(content)
-        end
+        content&.filename
       end
 
       def exist_releases?(repository)

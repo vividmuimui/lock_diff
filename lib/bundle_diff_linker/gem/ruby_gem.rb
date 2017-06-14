@@ -11,7 +11,6 @@ module BundleDiffLinker
       def_delegator :@ruby_gem, :source_code_uri, :source_code_url
 
       def initialize(name)
-        BundleDiffLinker.logger.debug("Fetch #{name} gem info by rubygems")
         content = HTTPClient.get_content("https://rubygems.org/api/v1/gems/#{name}.json")
         @ruby_gem = OpenStruct.new(JSON.parse(content))
       rescue => e

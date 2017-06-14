@@ -26,13 +26,12 @@ module BundleDiffLinker
           select(&:file?).
           find { |content|
             name = content.name.downcase.delete('_')
-            CHANGE_LOG_CANDIDATES.find do |candidate|
-              name.start_with? candidate
-            end
+            CHANGE_LOG_CANDIDATES.any? { |candidate| name.start_with? candidate }
           }&.html_url
       end
 
       def find_release_url
+        return unless @github_url
         unless BundleDiffLinker.client.exist_releases?(@repository)
           @github_url + "/releases"
         end

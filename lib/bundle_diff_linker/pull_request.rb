@@ -23,11 +23,8 @@ module BundleDiffLinker
     end
 
     def find_content_path(file_name)
-      find_content(file_name)&.path
+      BundleDiffLinker.client.pull_request_content_path(@repository, @number, file_name)
     end
 
-    def find_content(file_name)
-      BundleDiffLinker.client.pull_request_content(@repository, @number, file_name)
-    end
   end
 end
