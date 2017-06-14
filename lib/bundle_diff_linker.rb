@@ -1,11 +1,11 @@
 require "logger"
-require "bundle_diff_linker/version"
 
-require "bundle_diff_linker/formatter/github_markdown"
 require "bundle_diff_linker/core_ext/memoize"
+require "bundle_diff_linker/formatter/github_markdown"
 require "bundle_diff_linker/gem"
 require "bundle_diff_linker/github"
 require "bundle_diff_linker/pull_request"
+require "bundle_diff_linker/version"
 
 module BundleDiffLinker
   class << self
@@ -18,16 +18,10 @@ module BundleDiffLinker
       end
     end
 
-    def github_client
-      @github_client ||= begin
-        access_token = Github::AccessToken.new
-        Github::Client.new(access_token)
-      end
-    end
-
     def client
       github_client
     end
+    memoize :client
 
     def memoize_response?
       ENV.fetch('MEMOIZE_RESPONSE', 'true') == 'true'
@@ -46,5 +40,12 @@ module BundleDiffLinker
         puts formatter.format
       end
     end
+
+    private
+
+    def github_client
+      Github::Client.new(Github::AccessToken.new)
+    end
+
   end
 end

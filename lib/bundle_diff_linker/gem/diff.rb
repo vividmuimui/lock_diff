@@ -1,6 +1,11 @@
 module BundleDiffLinker
   module Gem
     class Diff
+      extend Forwardable
+
+      attr_reader :old_version, :new_version
+      def_delegators :@gem, :name, :url, :change_log_url
+
       def self.by(old_spec:, new_spec:)
         gem = Gem.new(new_spec.name)
         new(
@@ -9,8 +14,6 @@ module BundleDiffLinker
           new_version: Version.new(gem: gem, spec: new_spec)
         )
       end
-
-      attr_reader :old_version, :new_version
 
       def initialize(gem:, old_version:, new_version:)
         @gem = gem
@@ -21,18 +24,6 @@ module BundleDiffLinker
       def changed?
         @old_version.rivision != @new_version.rivision ||
           @old_version.version != @new_version.version
-      end
-
-      def name
-        @gem.name
-      end
-
-      def url
-        @gem.url
-      end
-
-      def change_log_url
-        @gem.change_log_url
       end
 
       def diff_url

@@ -23,7 +23,7 @@ module BundleDiffLinker
 
       def find_change_log_url
         BundleDiffLinker.client.contents(@repository).
-          select { |content| content.type == "file" }.
+          select(&:file?).
           find { |content|
             name = content.name.downcase.delete('_')
             CHANGE_LOG_CANDIDATES.find do |candidate|
@@ -33,7 +33,7 @@ module BundleDiffLinker
       end
 
       def find_release_url
-        unless BundleDiffLinker.client.releases(@repository).empty?
+        unless BundleDiffLinker.client.exist_releases?(@repository)
           @github_url + "/releases"
         end
       end

@@ -2,6 +2,7 @@ require 'octokit'
 
 module BundleDiffLinker
   module Github
+    # wrapper of Octokit::Client
     class Client
       def initialize(access_token)
         @client = Octokit::Client.new(access_token: access_token)
@@ -24,16 +25,21 @@ module BundleDiffLinker
         end
       end
 
-      def releases(repository)
-        @client.releases(repository)
+      def exist_releases?(repository)
+        return false unless repository
+        @client.releases(repository).empty?
       end
 
       def contents(repository)
-        @client.contents(repository)
+        return [] unless repository
+        @client.contents(repository).map do |content|
+          Content.new(content)
+        end
       end
 
-      def tags(repository)
-        @client.tags(repository)
+      def tag_names(repository)
+        return [] unless repository
+        @client.tags(repository).map(&:name)
       end
 
     end

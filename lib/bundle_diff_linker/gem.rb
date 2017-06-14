@@ -1,10 +1,10 @@
-require "bundle_diff_linker/gem/diff"
-require "bundle_diff_linker/gem/pr_lockfile"
-require "bundle_diff_linker/gem/lockfile_comparator"
-require "bundle_diff_linker/gem/ruby_gem"
-require "bundle_diff_linker/gem/gem"
-require "bundle_diff_linker/gem/version"
-require "bundle_diff_linker/gem/spec"
+require_relative "gem/diff"
+require_relative "gem/gem"
+require_relative "gem/lockfile_comparator"
+require_relative "gem/pr_lockfile"
+require_relative "gem/ruby_gem"
+require_relative "gem/spec"
+require_relative "gem/version"
 
 module BundleDiffLinker
   module Gem

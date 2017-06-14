@@ -1,11 +1,11 @@
-require "bundle_diff_linker/github/access_token"
-require "bundle_diff_linker/github/change_log_url_finder"
-require "bundle_diff_linker/github/client"
-require "bundle_diff_linker/github/github_url_detector"
-require "bundle_diff_linker/github/pull_request"
-require "bundle_diff_linker/github/pull_request_content"
-require "bundle_diff_linker/github/repository_name_detector"
-require "bundle_diff_linker/github/tag_finder"
+require_relative "github/access_token"
+require_relative "github/change_log_url_finder"
+require_relative "github/client"
+require_relative "github/content"
+require_relative "github/github_url_detector"
+require_relative "github/pull_request"
+require_relative "github/pull_request_content"
+require_relative "github/repository_name_detector"
 
 module BundleDiffLinker
   module Github

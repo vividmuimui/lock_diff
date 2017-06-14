@@ -1,7 +1,10 @@
 module BundleDiffLinker
   module Gem
     class Gem
+      extend Forwardable
+
       attr_reader :name
+      def_delegator :ruby_gem, :github_url
 
       def initialize(name)
         @name = name
@@ -11,13 +14,8 @@ module BundleDiffLinker
         ruby_gem.github_url || ruby_gem.homepage_url
       end
 
-      def github_url
-        ruby_gem.github_url
-      end
-
       def change_log_url
-        return unless repository
-        Github::ChangeLogUrlFinder.new(repository: repository, github_url: github_url).call
+        Github::ChangeLogUrlFinder.new(repository: repository, github_url: ruby_gem.github_url).call
       end
       memoize :change_log_url
 
@@ -25,11 +23,10 @@ module BundleDiffLinker
         Github::RepositoryNameDetector.new(ruby_gem.github_url).call
       end
 
-      def tags
-        return [] unless repository
-        BundleDiffLinker.github_client.tags(repository)
+      def tag_names
+        BundleDiffLinker.client.tag_names(repository)
       end
-      memoize :tags
+      memoize :tag_names
 
       private
 
