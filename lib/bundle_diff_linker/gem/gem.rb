@@ -17,39 +17,26 @@ module BundleDiffLinker
 
       def change_log_url
         return unless repository
-        if BundleDiffLinker.cache_response?
-          @change_log_url ||= Github::ChangeLogUrlFinder.new(repository: repository, github_url: github_url).call
-        else
-          Github::ChangeLogUrlFinder.new(repository: repository, github_url: github_url).call
-        end
+        Github::ChangeLogUrlFinder.new(repository: repository, github_url: github_url).call
       end
+      memoize :change_log_url
 
       def repository
         Github::RepositoryNameDetector.new(ruby_gem.github_url).call
       end
 
       def tags
-        if BundleDiffLinker.cache_response?
-          @git_tag ||= fetch_tags
-        else
-          fetch_tags
-        end
-      end
-
-      private
-
-      def fetch_tags
         return [] unless repository
         BundleDiffLinker.github_client.tags(repository)
       end
+      memoize :tags
+
+      private
 
       def ruby_gem
-        if BundleDiffLinker.cache_response?
-          @ruby_gem ||= RubyGem.new(name)
-        else
-          RubyGem.new(name)
-        end
+        RubyGem.new(name)
       end
+      memoize :ruby_gem
 
     end
   end

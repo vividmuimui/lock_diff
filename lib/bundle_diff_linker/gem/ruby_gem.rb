@@ -13,12 +13,9 @@ module BundleDiffLinker
       end
 
       def github_url
-        if BundleDiffLinker.cache_response?
-          @github_url ||= Github::GithubUrlDetector.new([source_code_url, homepage_url]).call
-        else
-          Github::GithubUrlDetector.new([source_code_url, homepage_url]).call
-        end
+        Github::GithubUrlDetector.new([source_code_url, homepage_url]).call
       end
+      memoize :github_url
 
       def homepage_url
         @ruby_gem.homepage_uri

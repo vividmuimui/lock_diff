@@ -2,6 +2,7 @@ require "logger"
 require "bundle_diff_linker/version"
 
 require "bundle_diff_linker/formatter/github_markdown"
+require "bundle_diff_linker/core_ext/memoize"
 require "bundle_diff_linker/gem"
 require "bundle_diff_linker/github"
 require "bundle_diff_linker/pull_request"
@@ -28,26 +29,15 @@ module BundleDiffLinker
       github_client
     end
 
-    def cache_response?
-      ENV.fetch('CACHE_RESPONSE', true)
+    def memoize_response?
+      ENV.fetch('MEMOIZE_RESPONSE', 'true') == 'true'
     end
 
     def run(repository:, pull_request_number:, with_comment: false)
-      require "stackprof"
-      StackProf.run(mode: :cpu, out: "tmp/stackprof-#{Time.now.strftime("%Y%m%d%H%M")}") do
-        _run(repository: repository, pull_request_number: pull_request_number, with_comment: with_comment)
-      end
-    end
-    def _run(repository:, pull_request_number:, with_comment: false)
-      # BundleDiffLinker.client = :github
-      # BundleDiffLinker.strategy = :bundler or :gemfile
-
       pr = PullRequest.new(repository: repository, number: pull_request_number)
-      # pr_gemfile_lock = Gem::PrGemfileLock.new(pr)
       pr_lockfile = Gem.pr_lockfile(pr)
       return unless pr_lockfile.updated?
 
-      # gem_diffs = Gem::LockComparator.by(pr_lockfile).compare
       lockfile_diffs = Gem.diffs(pr_lockfile)
       formatter = Formatter::GithubMarkdown.new(lockfile_diffs)
       if with_comment

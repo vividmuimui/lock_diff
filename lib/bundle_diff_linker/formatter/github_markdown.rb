@@ -1,23 +1,13 @@
 module BundleDiffLinker
   module Formatter
     class GithubMarkdown
-      def initialize(gem_diffs)
-        @gem_diffs = gem_diffs
+      def initialize(diffs)
+        @diffs = diffs
       end
 
 
       def format
-        # body = @gem_diffs.map { |gem_diff| format_gem_diff(gem_diff) }
-
-        BundleDiffLinker.logger.info '--start'
-        body = @gem_diffs.map do |gem_diff|
-          before = Time.now
-          row = format_gem_diff(gem_diff)
-          after = Time.now
-          BundleDiffLinker.logger.info "#{after - before}  -- #{gem_diff.name}"
-          row
-        end
-        BundleDiffLinker.logger.info '--end'
+        body = @diffs.map { |diff| format_gem_diff(diff) }
         (headers + body).join("\n")
       end
 
@@ -30,16 +20,16 @@ module BundleDiffLinker
         ]
       end
 
-      def format_gem_diff(gem_diff)
+      def format_gem_diff(diff)
         text = []
-        text << "[#{gem_diff.name}](#{gem_diff.url})"
-        if gem_diff.diff_url
-          text << "[#{gem_diff.old_version}...#{gem_diff.new_version}](#{gem_diff.diff_url})"
+        text << "[#{diff.name}](#{diff.url})"
+        if diff.diff_url
+          text << "[#{diff.old_version}...#{diff.new_version}](#{diff.diff_url})"
         else
-          text << "#{gem_diff.old_version}...#{gem_diff.new_version}"
+          text << "#{diff.old_version}...#{diff.new_version}"
         end
-        if gem_diff.change_log_url
-          text << "[change log](#{gem_diff.change_log_url})"
+        if diff.change_log_url
+          text << "[change log](#{diff.change_log_url})"
         else
           text << " | "
         end

@@ -1,5 +1,3 @@
-require 'octokit'
-
 module BundleDiffLinker
   module Github
     class AccessToken < ::String
