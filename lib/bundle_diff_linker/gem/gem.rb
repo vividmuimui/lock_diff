@@ -1,6 +1,6 @@
 module BundleDiffLinker
   module Gem
-    class Info
+    class Gem
       attr_reader :name
       def initialize(name)
         @name = name

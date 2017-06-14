@@ -14,7 +14,7 @@ module BundleDiffLinker
           before = Time.now
           row = format_gem_diff(gem_diff)
           after = Time.now
-          BundleDiffLinker.logger.info "#{after - before}  -- #{gem_diff.new_gem.name}"
+          BundleDiffLinker.logger.info "#{after - before}  -- #{gem_diff.name}"
           row
         end
         BundleDiffLinker.logger.info '--end'
@@ -32,23 +32,18 @@ module BundleDiffLinker
 
       def format_gem_diff(gem_diff)
         text = []
-        text << "[#{gem_diff.new_gem.name}](#{gem_diff.new_gem.url})"
-        if diff_link(gem_diff)
-          text << "[#{gem_diff.old_gem.version}...#{gem_diff.new_gem.version}](#{diff_link(gem_diff)})"
+        text << "[#{gem_diff.name}](#{gem_diff.url})"
+        if gem_diff.diff_url
+          text << "[#{gem_diff.old_version}...#{gem_diff.new_version}](#{gem_diff.diff_url})"
         else
-          text << "#{gem_diff.old_gem.version}...#{gem_diff.new_gem.version}"
+          text << "#{gem_diff.old_version}...#{gem_diff.new_version}"
         end
-        if gem_diff.new_gem.change_log_link
-          text << "[change log](#{gem_diff.new_gem.change_log_link})"
+        if gem_diff.change_log_url
+          text << "[change log](#{gem_diff.change_log_url})"
         else
           text << " | "
         end
         "| #{text.join(' | ')} |"
-      end
-
-      def diff_link(gem_diff)
-        return unless gem_diff.new_gem.github_url && gem_diff.new_gem.ref && gem_diff.old_gem.ref
-        "#{gem_diff.new_gem.github_url}/compare/#{gem_diff.old_gem.ref}...#{gem_diff.new_gem.ref}"
       end
 
     end

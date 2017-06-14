@@ -1,8 +1,8 @@
 module BundleDiffLinker
   module Gem
     class Spec
-      def self.specs(lazy_specifications)
-        lazy_specifications.map do |lazy_specification|
+      def self.specs_by(lockfile)
+        Bundler::LockfileParser.new(lockfile).specs.map do |lazy_specification|
           new(lazy_specification)
         end
       end
@@ -16,11 +16,11 @@ module BundleDiffLinker
       end
 
       def version
-        @spec.version.to_s
+        @spec.version
       end
 
       def rivision
-        @spec.rivision
+        @spec.git_version
       end
 
     end
