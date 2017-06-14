@@ -13,7 +13,7 @@ module BundleDiffLinker
         @new_lockfile = new_lockfile
       end
 
-      def compare
+      def call
         old_specs_by_name = specs(@old_lockfile).map { |spec| [spec.name, spec] }.to_h
         specs(@new_lockfile).map do |new_spec|
           old_spec = old_specs_by_name[new_spec.name]

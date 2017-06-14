@@ -2,7 +2,6 @@ require "logger"
 require "bundle_diff_linker/version"
 
 require "bundle_diff_linker/formatter/github_markdown"
-require "bundle_diff_linker/gem_info"
 require "bundle_diff_linker/gem"
 require "bundle_diff_linker/github"
 require "bundle_diff_linker/pull_request"
@@ -34,6 +33,12 @@ module BundleDiffLinker
     end
 
     def run(repository:, pull_request_number:, with_comment: false)
+      require "stackprof"
+      StackProf.run(mode: :cpu, out: "tmp/stackprof-#{Time.now.strftime("%Y%m%d%H%M")}") do
+        _run(repository: repository, pull_request_number: pull_request_number, with_comment: with_comment)
+      end
+    end
+    def _run(repository:, pull_request_number:, with_comment: false)
       # BundleDiffLinker.client = :github
       # BundleDiffLinker.strategy = :bundler or :gemfile
 

@@ -22,14 +22,13 @@ module BundleDiffLinker
         @spec.version.to_s
       end
 
-      private
-
       def git_tag
-        if BundleDiffLinker.cache_response?
-          @git_tag ||= BundleDiffLinker::Github::TagFinder.new(name: @gem.name, repository: @gem.repository, version: version.to_s).call
-        else
-          BundleDiffLinker::Github::TagFinder.new(name: @gem.name, repository: @gem.repository, version: version.to_s).call
-        end
+        version_str = @spec.version.to_s
+        @gem.tags.find do |tag|
+          tag.name == version_str ||
+            tag.name == "v#{version_str}" ||
+            tag.name == "#{@gem.name}-#{version_str}"
+        end&.name
       end
 
     end

@@ -14,7 +14,7 @@ module BundleDiffLinker
       end
 
       def diffs(pr_lockfile)
-        LockfileComparator.by(pr_lockfile).compare
+        LockfileComparator.by(pr_lockfile).call
       end
 
     end

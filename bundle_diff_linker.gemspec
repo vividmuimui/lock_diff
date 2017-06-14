@@ -32,5 +32,7 @@ Gem::Specification.new do |spec|
   # あとでけすーーーーーーーーーー
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-byebug"
+  spec.add_development_dependency "stackprof"
+  spec.add_development_dependency "stackprof-webnav"
 
 end
