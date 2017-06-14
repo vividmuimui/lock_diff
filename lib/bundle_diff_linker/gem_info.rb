@@ -10,16 +10,9 @@ module BundleDiffLinker
       @spec.name
     end
 
+    # versionに依存するもの
     def version
       @spec.version.to_s
-    end
-
-    def url
-      ruby_gem.github_url || ruby_gem.homepage_uri
-    end
-
-    def github_url
-      ruby_gem.github_url
     end
 
     def ref
@@ -30,12 +23,21 @@ module BundleDiffLinker
       @spec.git_version
     end
 
-    def change_log_link
-      Github::ChangeLogUrlFinder.new(self).find
-    end
-
     def git_tag
       @git_tag ||= BundleDiffLinker::Github::TagFinder.new(self).find
+    end
+    # -----------
+
+    def url
+      ruby_gem.github_url || ruby_gem.homepage_uri
+    end
+
+    def github_url
+      ruby_gem.github_url
+    end
+
+    def change_log_link
+      Github::ChangeLogUrlFinder.new(self).find
     end
 
     REGEXP = /github\.com\/([^\/]+)\/([^\/]+)/

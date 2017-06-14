@@ -15,11 +15,10 @@ module BundleDiffLinker
 
       def compare
         old_specs_by_name = parse(@old_lockfile).specs.map { |spec| [spec.name, spec] }.to_h
-        binding.pry
         parse(@new_lockfile).specs.map do |new_spec|
           old_spec = old_specs_by_name[new_spec.name]
           next unless old_spec
-          GemDiff.by(old_spec: old_spec, new_spec: new_spec)
+          Diff.by(old_spec: old_spec, new_spec: new_spec)
         end.compact.select(&:difference?)
       end
 

@@ -2,7 +2,6 @@ require "logger"
 require "bundle_diff_linker/version"
 
 require "bundle_diff_linker/formatter/github_markdown"
-require "bundle_diff_linker/gem_diff"
 require "bundle_diff_linker/gem_info"
 require "bundle_diff_linker/gem"
 require "bundle_diff_linker/github"

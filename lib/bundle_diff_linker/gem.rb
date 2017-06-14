@@ -1,3 +1,4 @@
+require "bundle_diff_linker/gem/diff"
 require "bundle_diff_linker/gem/pr_lockfile"
 require "bundle_diff_linker/gem/lockfile_comparator"
 

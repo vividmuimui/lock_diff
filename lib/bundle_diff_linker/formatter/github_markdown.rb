@@ -7,7 +7,18 @@ module BundleDiffLinker
 
 
       def format
-        (headers + @gem_diffs.map { |gem_diff| format_gem_diff(gem_diff) }).join("\n")
+        # body = @gem_diffs.map { |gem_diff| format_gem_diff(gem_diff) }
+
+        BundleDiffLinker.logger.info '--start'
+        body = @gem_diffs.map do |gem_diff|
+          before = Time.now
+          row = format_gem_diff(gem_diff)
+          after = Time.now
+          BundleDiffLinker.logger.info "#{after - before}  -- #{gem_diff.new_gem.name}"
+          row
+        end
+        BundleDiffLinker.logger.info '--end'
+        (headers + body).join("\n")
       end
 
       private
