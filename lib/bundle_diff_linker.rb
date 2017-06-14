@@ -6,7 +6,6 @@ require "bundle_diff_linker/gem_info"
 require "bundle_diff_linker/gem"
 require "bundle_diff_linker/github"
 require "bundle_diff_linker/pull_request"
-require "bundle_diff_linker/ruby_gem"
 
 module BundleDiffLinker
   class << self

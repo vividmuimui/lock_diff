@@ -24,7 +24,7 @@ module BundleDiffLinker
     end
 
     def git_tag
-      @git_tag ||= BundleDiffLinker::Github::TagFinder.new(self).find
+      @git_tag ||= BundleDiffLinker::Github::TagFinder.new(name: name, repository: repository, version: version).call
     end
     # -----------
 
@@ -40,9 +40,8 @@ module BundleDiffLinker
       Github::ChangeLogUrlFinder.new(self).find
     end
 
-    REGEXP = /github\.com\/([^\/]+)\/([^\/]+)/
     def repository
-      Github::RepositoryNameDetector.new(ruby_gem.github_url).detect
+      Github::RepositoryNameDetector.new(ruby_gem.github_url).call
     end
 
     def ruby_gem

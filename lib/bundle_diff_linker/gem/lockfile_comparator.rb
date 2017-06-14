@@ -14,8 +14,9 @@ module BundleDiffLinker
       end
 
       def compare
-        old_specs_by_name = parse(@old_lockfile).specs.map { |spec| [spec.name, spec] }.to_h
-        parse(@new_lockfile).specs.map do |new_spec|
+        binding.pry
+        old_specs_by_name = specs(@old_lockfile).map { |spec| [spec.name, spec] }.to_h
+        specs(@new_lockfile).map do |new_spec|
           old_spec = old_specs_by_name[new_spec.name]
           next unless old_spec
           Diff.by(old_spec: old_spec, new_spec: new_spec)
@@ -24,8 +25,8 @@ module BundleDiffLinker
 
       private
 
-      def parse(lockfile)
-        Bundler::LockfileParser.new(lockfile)
+      def specs(lockfile)
+        Spec.specs(Bundler::LockfileParser.new(lockfile))
       end
 
     end

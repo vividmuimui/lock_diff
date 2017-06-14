@@ -3,13 +3,13 @@ require "httpclient"
 module BundleDiffLinker
   module Github
     class GithubUrlDetector
-      REGEXP = %r!https?://([^/]+)\.github\.[^/]+/([^/]+)!
+      REGEXP = %r!https?://([^/]+)\.github\.[^/]+/([^/]+)! # github.com, github.io
 
       def initialize(urls)
         @urls = Array(urls).compact
       end
 
-      def detect
+      def call
         url = @urls.find { |url| url.include?("github.com") }
         return unless url
 
@@ -19,14 +19,12 @@ module BundleDiffLinker
 
         if url.match?(REGEXP)
           _, owner, repo = url.match(REGEXP).to_a
-          _url = "https://github.com/#{owner}/#{repo}"
-          if HTTPClient.get(_url).ok?
-            url = _url
-          end
+          url = "https://github.com/#{owner}/#{repo}"
+          HTTPClient.get(url).ok? ? url : nil
+        else
+          repository = RepositoryNameDetector.new(url).call
+          "https://github.com/#{repository}"
         end
-
-        repository = RepositoryNameDetector.new(url).detect
-        "https://github.com/#{repository}"
       rescue => e
         BundleDiffLinker.logger.warn("Could not detect github url by #{url} because of #{e.inspect}")
         nil

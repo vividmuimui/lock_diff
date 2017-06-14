@@ -7,7 +7,7 @@ module BundleDiffLinker
         @url = url
       end
 
-      def detect
+      def call
         return unless @url
         _, repo_owner, repo_name = @url.match(REGEXP).to_a
         "#{repo_owner}/#{repo_name}"

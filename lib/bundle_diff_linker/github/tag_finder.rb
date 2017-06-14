@@ -1,17 +1,18 @@
 module BundleDiffLinker
   module Github
     class TagFinder
-      def initialize(gem_info)
-        @gem_info = gem_info
+      def initialize(name:, repository:, version:)
+        @name = name
+        @repository = repository
+        @version = version
       end
 
-      def find
-        return unless @gem_info.repository
+      def call
         BundleDiffLinker.logger.debug("Try to detect git tag of #{full_name}")
-        BundleDiffLinker.github_client.tags(@gem_info.repository).find do |tag|
-          tag.name == @gem_info.version ||
-            tag.name == "v#{@gem_info.version}" ||
-            tag.name == "#{@gem_info.name}-#{@gem_info.version}"
+        BundleDiffLinker.github_client.tags(@repository).find do |tag|
+          tag.name == @version ||
+            tag.name == "v#{@version}" ||
+            tag.name == "#{@name}-#{@version}"
         end&.name
       rescue => e
         BundleDiffLinker.logger.warn("Could not detect git tag of #{full_name} because of #{e.inspect}")
@@ -22,7 +23,7 @@ module BundleDiffLinker
       private
 
       def full_name
-        "#{@gem_info.repository}-#{@gem_info.version}"
+        "#{@repository}-#{@version}"
       end
     end
   end
