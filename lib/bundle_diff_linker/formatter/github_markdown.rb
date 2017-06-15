@@ -21,6 +21,7 @@ module BundleDiffLinker
       end
 
       def format_gem_diff(diff)
+        BundleDiffLinker.logger.debug diff.name
         text = []
         text << "[#{diff.name}](#{diff.url})"
         if diff.diff_url

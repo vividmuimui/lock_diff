@@ -13,7 +13,6 @@ module BundleDiffLinker
         url = @urls.find { |url| url.include?("github.com") }
         return unless url
 
-        BundleDiffLinker.logger.debug("Try to detect github url by #{url}")
         response = HTTPClient.get(url, follow_redirect: true)
         url = response.header.request_uri.to_s
 

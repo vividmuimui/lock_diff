@@ -3,7 +3,7 @@ require 'ostruct'
 
 module BundleDiffLinker
   module Gem
-    # wrapper of RubyGEm
+    # wrapper of RubyGem
     class RubyGem
       extend Forwardable
 

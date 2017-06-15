@@ -1,5 +1,6 @@
 module BundleDiffLinker
   module Github
+    # wrapper of github PullRequest
     class PullRequest
       def initialize(pull_request)
         @pr = pull_request

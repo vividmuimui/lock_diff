@@ -17,7 +17,7 @@ module BundleDiffLinker
         Github::PullRequest.new(@client.pull_request(repository, number))
       end
 
-      def pull_request_content(repository, number, file_name)
+      def pull_request_content_path(repository, number, file_name)
         content = @client.pull_request_files(repository, number).
           find { |file| file.filename.include?(file_name) }
         content&.filename
