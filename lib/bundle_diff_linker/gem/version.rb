@@ -11,11 +11,11 @@ module BundleDiffLinker
       end
 
       def ref
-        git_tag || rivision
+        rivision || git_tag
       end
 
       def to_s
-        version.to_s
+        ref || version.to_s
       end
 
       private
