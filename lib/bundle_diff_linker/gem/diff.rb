@@ -22,7 +22,7 @@ module BundleDiffLinker
       end
 
       def changed?
-        @old_version.rivision != @new_version.rivision ||
+        @old_version.revision != @new_version.revision ||
           @old_version.version != @new_version.version
       end
 

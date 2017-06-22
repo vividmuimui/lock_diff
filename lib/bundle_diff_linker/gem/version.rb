@@ -3,7 +3,7 @@ module BundleDiffLinker
     class Version
       extend Forwardable
 
-      def_delegators :@spec, :rivision, :version
+      def_delegators :@spec, :revision, :version
 
       def initialize(gem:, spec:)
         @gem = gem
@@ -11,7 +11,7 @@ module BundleDiffLinker
       end
 
       def ref
-        rivision || git_tag
+        revision || git_tag
       end
 
       def to_s

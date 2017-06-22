@@ -16,7 +16,7 @@ module BundleDiffLinker
         @spec = lazy_specification
       end
 
-      def rivision
+      def revision
         @spec.git_version&.strip
       end
 
