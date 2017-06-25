@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require "bundle_diff_linker"
+require "optparse"
+
+options = {
+  post_comment: false
+}
+opt = OptionParser.new
+
+opt.on('-r', '--repository=REPOSITORY', 'required. Like as rails/rails') { |v| options[:repository] = v }
+opt.on('-n', '--number=PULL_REQUEST_NUMBER', 'required') { |v| options[:number] = v }
+opt.on('--post-comment=true or false', 'dafault=false') { |v| options[:post_comment] = v }
+opt.parse!
+
+unless options[:repository] && options[:number]
+  $stdout.puts opt.help
+else
+  BundleDiffLinker.run(options)
+end

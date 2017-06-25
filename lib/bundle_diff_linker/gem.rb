@@ -1,4 +1,4 @@
-require_relative "gem/diff"
+require_relative "gem/diff_info"
 require_relative "gem/gem"
 require_relative "gem/lockfile_comparator"
 require_relative "gem/pr_lockfile"
@@ -9,12 +9,12 @@ require_relative "gem/version"
 module BundleDiffLinker
   module Gem
     class << self
-      def pr_lockfile(pull_request)
-        PrLockfile.new(pull_request)
-      end
+      class NotChangedLockfile < StandardError; end
 
-      def diffs(pr_lockfile)
-        LockfileComparator.by(pr_lockfile).call
+      def lock_file_diffs(pull_request)
+        pr_lockfile = PrLockfile.new(pull_request)
+        raise NotChangedLockfile unless pr_lockfile.changed?
+        LockfileComparator.compare_by(pr_lockfile)
       end
 
     end

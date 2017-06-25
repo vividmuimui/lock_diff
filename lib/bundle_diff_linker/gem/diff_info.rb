@@ -1,6 +1,6 @@
 module BundleDiffLinker
   module Gem
-    class Diff
+    class DiffInfo
       extend Forwardable
 
       attr_reader :old_version, :new_version

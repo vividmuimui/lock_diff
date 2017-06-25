@@ -3,6 +3,14 @@ require 'octokit'
 module BundleDiffLinker
   module Github
     # wrapper of Octokit::Client
+
+    class << self
+      def client
+        Github::Client.new(Github::AccessToken.new)
+      end
+      memoize :client
+    end
+
     class Client
       def initialize(access_token)
         @client = Octokit::Client.new(access_token: access_token)
@@ -38,6 +46,10 @@ module BundleDiffLinker
       def tag_names(repository)
         return [] unless repository
         @client.tags(repository).map(&:name)
+      end
+
+      def add_comment(repository, number, comment)
+        @client.add_comment(repository, number, comment)
       end
 
     end

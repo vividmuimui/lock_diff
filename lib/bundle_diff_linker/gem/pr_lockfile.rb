@@ -5,7 +5,7 @@ module BundleDiffLinker
         @pr = pull_request
       end
 
-      def updated?
+      def changed?
         !!path
       end
 

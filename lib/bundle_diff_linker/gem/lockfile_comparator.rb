@@ -1,11 +1,11 @@
 module BundleDiffLinker
   module Gem
     class LockfileComparator
-      def self.by(pr_gemfile_lock)
+      def self.compare_by(pr_gemfile_lock)
         new(
           old_lockfile: pr_gemfile_lock.base_file,
           new_lockfile: pr_gemfile_lock.head_file
-        )
+        ).call
       end
 
       def initialize(old_lockfile:, new_lockfile:)
@@ -14,21 +14,14 @@ module BundleDiffLinker
       end
 
       def call
-        old_specs_by_name = specs(@old_lockfile).map { |spec| [spec.name, spec] }.to_h
+        old_specs_by_name = Spec.specs_by(@old_lockfile).map { |spec| [spec.name, spec] }.to_h
 
-        specs(@new_lockfile).map do |new_spec|
+        Spec.specs_by(@new_lockfile).map do |new_spec|
           old_spec = old_specs_by_name[new_spec.name]
           next unless old_spec
-          Diff.by(old_spec: old_spec, new_spec: new_spec)
+          DiffInfo.by(old_spec: old_spec, new_spec: new_spec)
         end.compact.select(&:changed?)
       end
-
-      private
-
-      def specs(lockfile)
-        Spec.specs_by(lockfile)
-      end
-
     end
   end
 end

@@ -34,7 +34,7 @@ module BundleDiffLinker
             end
 
           define_method("#{method_name}_with_memoize") do |*args, &block|
-            if BundleDiffLinker.memoize_response?
+            if BundleDiffLinker.memoize_response
               if has_memoized?(method_name)
                 memoized(method_name)
               else

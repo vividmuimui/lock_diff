@@ -1,13 +1,16 @@
 module BundleDiffLinker
   module Formatter
     class GithubMarkdown
-      def initialize(diffs)
-        @diffs = diffs
+      def self.format(diff_infos)
+        new(diff_infos).call
+      end
+
+      def initialize(diff_infos)
+        @diff_infos = diff_infos
       end
 
 
-      def format
-        body = @diffs.map { |diff| format_gem_diff(diff) }
+      def call
         (headers + body).join("\n")
       end
 
@@ -20,21 +23,47 @@ module BundleDiffLinker
         ]
       end
 
-      def format_gem_diff(diff)
-        BundleDiffLinker.logger.debug diff.name
-        text = []
-        text << "[#{diff.name}](#{diff.url})"
-        if diff.diff_url
-          text << "[#{diff.old_version}...#{diff.new_version}](#{diff.diff_url})"
-        else
-          text << "#{diff.old_version}...#{diff.new_version}"
+      def body
+        @diff_infos.map { |diff_info| DiffFormmater.new(diff_info).call }
+      end
+
+      class DiffFormmater
+        def initialize(diff_info)
+          BundleDiffLinker.logger.debug diff_info.name
+          @diff_info = diff_info
         end
-        if diff.change_log_url
-          text << "[change log](#{diff.change_log_url})"
-        else
-          text << " | "
+
+        def call
+          text = []
+          text << name
+          text << diff_text
+          text << change_log
+          "| #{text.join(' | ')} |"
         end
-        "| #{text.join(' | ')} |"
+
+        private
+
+        attr_reader :diff_info
+
+        def name
+          "[#{diff_info.name}](#{diff_info.url})"
+        end
+
+        def diff_text
+          if diff_info.diff_url
+            "[#{diff_info.old_version}...#{diff_info.new_version}](#{diff_info.diff_url})"
+          else
+            "#{diff_info.old_version}...#{diff_info.new_version}"
+          end
+        end
+
+        def change_log
+          if diff_info.change_log_url
+            "[change log](#{diff_info.change_log_url})"
+          else
+            ""
+          end
+        end
       end
 
     end

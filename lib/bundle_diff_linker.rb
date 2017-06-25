@@ -9,43 +9,28 @@ require "bundle_diff_linker/version"
 
 module BundleDiffLinker
   class << self
-    def logger
-      @logger ||= begin
-        $stdout.sync = true
-        logger = Logger.new($stdout)
-        logger.level = ENV["LOG_LEVEL"] ? ENV["LOG_LEVEL"].to_i : Logger::INFO
-        logger
-      end
-    end
+    attr_accessor :client_class, :formatter, :strategy, :memoize_response, :logger
 
     def client
-      github_client
-    end
-    memoize :client
-
-    def memoize_response?
-      ENV.fetch('MEMOIZE_RESPONSE', 'true') == 'true'
+      client_class.client
     end
 
-    def run(repository:, pull_request_number:, with_comment: false)
-      pr = PullRequest.new(repository: repository, number: pull_request_number)
-      pr_lockfile = Gem.pr_lockfile(pr)
-      return unless pr_lockfile.updated?
+    def run(repository:, number:, post_comment: false)
+      pr = PullRequest.new(repository: repository, number: number)
+      lockfile_diff_infos = strategy.lock_file_diffs(pr)
+      result = formatter.format(lockfile_diff_infos)
 
-      lockfile_diffs = Gem.diffs(pr_lockfile)
-      formatter = Formatter::GithubMarkdown.new(lockfile_diffs)
-      if with_comment
-        github_client.add_comment(repository, pull_request_number, formatter.format)
+      if post_comment
+        client.add_comment(repository, number, result)
       else
-        puts formatter.format
+        $stdout.puts result
       end
     end
-
-    private
-
-    def github_client
-      Github::Client.new(Github::AccessToken.new)
-    end
-
   end
+
+  self.client_class = Github
+  self.formatter = Formatter::GithubMarkdown
+  self.strategy = Gem
+  self.memoize_response = true
+  self.logger = Logger.new(nil)
 end
