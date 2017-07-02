@@ -6,7 +6,7 @@ require_relative "github/github_url_detector"
 require_relative "github/pull_request"
 require_relative "github/repository_name_detector"
 
-module BundleDiffLinker
+module LockDiff
   module Github
   end
 end

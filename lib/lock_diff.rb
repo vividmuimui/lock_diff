@@ -1,13 +1,13 @@
 require "logger"
 
-require "bundle_diff_linker/core_ext/memoize"
-require "bundle_diff_linker/formatter/github_markdown"
-require "bundle_diff_linker/gem"
-require "bundle_diff_linker/github"
-require "bundle_diff_linker/pull_request"
-require "bundle_diff_linker/version"
+require "lock_diff/core_ext/memoize"
+require "lock_diff/formatter/github_markdown"
+require "lock_diff/gem"
+require "lock_diff/github"
+require "lock_diff/pull_request"
+require "lock_diff/version"
 
-module BundleDiffLinker
+module LockDiff
   class << self
     attr_accessor :client_class, :formatter, :strategy, :memoize_response, :logger
 

@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Gem
     class LockfileComparator
       def self.compare_by(pr_gemfile_lock)

@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "bundle_diff_linker"
+require "lock_diff"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

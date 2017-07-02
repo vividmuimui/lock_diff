@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/bundle_diff_linker
+    working_directory: ~/lock_diff
     docker:
       - image: circleci/ruby:2.4.1-node
     steps:

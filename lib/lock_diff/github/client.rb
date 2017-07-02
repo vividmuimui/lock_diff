@@ -1,6 +1,6 @@
 require 'octokit'
 
-module BundleDiffLinker
+module LockDiff
   module Github
     # wrapper of Octokit::Client
 

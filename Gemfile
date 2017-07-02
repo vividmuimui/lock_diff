@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in bundle_diff_linker.gemspec
+# Specify your gem's dependencies in lock_diff.gemspec
 gemspec

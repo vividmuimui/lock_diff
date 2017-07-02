@@ -1,6 +1,6 @@
 require "httpclient"
 
-module BundleDiffLinker
+module LockDiff
   module Github
     class GithubUrlDetector
       REGEXP = %r!https?://([^/]+)\.github\.[^/]+/([^/]+)! # github.com, github.io
@@ -25,7 +25,7 @@ module BundleDiffLinker
           "https://github.com/#{repository}"
         end
       rescue => e
-        BundleDiffLinker.logger.warn("Could not detect github url by #{url} because of #{e.inspect}")
+        LockDiff.logger.warn("Could not detect github url by #{url} because of #{e.inspect}")
         nil
       end
     end

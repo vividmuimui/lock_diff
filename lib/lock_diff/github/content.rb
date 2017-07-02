@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Github
     # wrapper of Github Content
     class Content

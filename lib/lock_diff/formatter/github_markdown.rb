@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Formatter
     class GithubMarkdown
       def self.format(diff_infos)
@@ -29,7 +29,7 @@ module BundleDiffLinker
 
       class DiffFormmater
         def initialize(diff_info)
-          BundleDiffLinker.logger.debug diff_info.name
+          LockDiff.logger.debug diff_info.name
           @diff_info = diff_info
         end
 

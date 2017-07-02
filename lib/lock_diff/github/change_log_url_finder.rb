@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Github
     class ChangeLogUrlFinder
       CHANGE_LOG_CANDIDATES = %w(

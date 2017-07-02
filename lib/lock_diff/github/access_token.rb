@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Github
     class AccessToken < ::String
       def initialize(token = nil)

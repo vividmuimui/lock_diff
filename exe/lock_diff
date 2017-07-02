@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "bundle_diff_linker"
+require "lock_diff"
 require "optparse"
 
 options = {
@@ -16,5 +16,5 @@ opt.parse!
 unless options[:repository] && options[:number]
   $stdout.puts opt.help
 else
-  BundleDiffLinker.run(options)
+  LockDiff.run(options)
 end

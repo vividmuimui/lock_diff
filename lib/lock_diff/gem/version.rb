@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Gem
     class Version
       extend Forwardable

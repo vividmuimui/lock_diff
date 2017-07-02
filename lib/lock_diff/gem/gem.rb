@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Gem
     class Gem
       extend Forwardable
@@ -24,7 +24,7 @@ module BundleDiffLinker
       end
 
       def tag_names
-        BundleDiffLinker.client.tag_names(repository)
+        LockDiff.client.tag_names(repository)
       end
       memoize :tag_names
 

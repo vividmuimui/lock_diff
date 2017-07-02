@@ -6,7 +6,7 @@ require_relative "gem/ruby_gem"
 require_relative "gem/spec"
 require_relative "gem/version"
 
-module BundleDiffLinker
+module LockDiff
   module Gem
     class << self
       class NotChangedLockfile < StandardError; end

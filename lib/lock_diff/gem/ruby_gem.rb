@@ -1,7 +1,7 @@
 require "httpclient"
 require 'ostruct'
 
-module BundleDiffLinker
+module LockDiff
   module Gem
     # wrapper of RubyGem
     class RubyGem
@@ -14,7 +14,7 @@ module BundleDiffLinker
         content = HTTPClient.get_content("https://rubygems.org/api/v1/gems/#{name}.json")
         @ruby_gem = OpenStruct.new(JSON.parse(content))
       rescue => e
-        BundleDiffLinker.logger.warn("Could not fetch gem info of #{@spec.full_name} because of #{e.inspect}")
+        LockDiff.logger.warn("Could not fetch gem info of #{@spec.full_name} because of #{e.inspect}")
       end
 
       def github_url

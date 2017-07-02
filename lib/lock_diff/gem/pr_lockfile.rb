@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Gem
     class PrLockfile
       def initialize(pull_request)
@@ -15,12 +15,12 @@ module BundleDiffLinker
       memoize :path
 
       def base_file
-        BundleDiffLinker.client.file(@pr.repository, path: path, ref: @pr.base_sha)
+        LockDiff.client.file(@pr.repository, path: path, ref: @pr.base_sha)
       end
       memoize :base_file
 
       def head_file
-        BundleDiffLinker.client.file(@pr.repository, path: path, ref: @pr.head_sha)
+        LockDiff.client.file(@pr.repository, path: path, ref: @pr.head_sha)
       end
       memoize :head_file
 

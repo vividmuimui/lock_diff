@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module CorExt
     module Memoize
       def self.included(base)
@@ -34,7 +34,7 @@ module BundleDiffLinker
             end
 
           define_method("#{method_name}_with_memoize") do |*args, &block|
-            if BundleDiffLinker.memoize_response
+            if LockDiff.memoize_response
               if has_memoized?(method_name)
                 memoized(method_name)
               else
@@ -55,4 +55,4 @@ module BundleDiffLinker
   end
 end
 
-Object.send(:include, BundleDiffLinker::CorExt::Memoize)
+Object.send(:include, LockDiff::CorExt::Memoize)

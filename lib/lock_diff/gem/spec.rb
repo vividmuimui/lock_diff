@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Gem
     # wrapper of lazy_specification
     class Spec

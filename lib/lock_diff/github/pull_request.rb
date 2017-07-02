@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Github
     # wrapper of github PullRequest
     class PullRequest

@@ -1,4 +1,4 @@
-module BundleDiffLinker
+module LockDiff
   module Github
     class RepositoryNameDetector
       REGEXP = %r!github\.com/([^/]+)/([^/]+)!
