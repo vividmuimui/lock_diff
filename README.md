@@ -20,6 +20,13 @@ Or install it yourself as:
 
 ## Usage
 
+
+### Command Line
+
+```sh
+bundle_diff_linker
+```
+
 TODO:
 
 ## Development
