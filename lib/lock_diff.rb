@@ -1,4 +1,5 @@
 require "logger"
+require "forwardable"
 
 require "lock_diff/core_ext/memoize"
 require "lock_diff/formatter/github_markdown"

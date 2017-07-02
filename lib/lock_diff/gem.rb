@@ -1,3 +1,4 @@
+require "bundler"
 require_relative "gem/diff_info"
 require_relative "gem/gem"
 require_relative "gem/lockfile_comparator"

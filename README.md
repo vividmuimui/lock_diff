@@ -2,6 +2,16 @@
 
 [![CircleCI](https://circleci.com/gh/vividmuimui/lock_diff.svg?style=svg)](https://circleci.com/gh/vividmuimui/lock_diff)
 
+This Gem is generate `changelog url`, `github compare link` by lock file of Github pull request. And commant to that pull request.
+Like as this.
+
+> https://github.com/vividmuimui/rails_tutorial/pull/26#issuecomment-312491272
+> ![image](https://user-images.githubusercontent.com/1803598/27770131-21db6112-5f74-11e7-80ed-28e5793beffc.png)
+
+## Strategies
+
+- Gemfile.lock(Ruby/Bundler)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -20,7 +30,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO:
+Require `GITHUB_ACCESS_TOKEN` environment.
+
+### Command line
+
+```sh
+$ lock_diff
+Usage: lock_diff [options]
+    -r, --repository=REPOSITORY      required. Like as rails/rails
+    -n, --number=PULL_REQUEST_NUMBER required
+        --post-comment=true or false dafault=false
+```
+
+```sh
+$ lock_diff -r "vividmuimui/rails_tutorial" -n 26 --post-comment=false
+```
+
+### Ruby
+
+```ruby
+require 'lock_diff'
+LockDiff.run(repository: "vividmuimui/rails_tutorial", number: 26, post_comment: false)
+```
 
 ## Development
 
