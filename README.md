@@ -2,9 +2,9 @@
 
 [![CircleCI](https://circleci.com/gh/vividmuimui/lock_diff.svg?style=svg)](https://circleci.com/gh/vividmuimui/lock_diff)
 
-This Gem is generate `changelog url`, `github compare link` by lock file of Github pull request. And comment to pull request.
+This Gem is generates `changelog url`, `github compare link` by lock file of Github pull request. And comment to pull request.
 
-Like as this.
+Like this.
 
 > https://github.com/vividmuimui/rails_tutorial/pull/26#issuecomment-312491272
 > ![image](https://user-images.githubusercontent.com/1803598/27770516-f5774972-5f7a-11e7-87a6-7c3cbf1de745.png)
