@@ -38,7 +38,7 @@ Require `GITHUB_ACCESS_TOKEN` environment.
 ```sh
 $ lock_diff
 Usage: lock_diff [options]
-    -r, --repository=REPOSITORY      required. Like as rails/rails
+    -r, --repository=REPOSITORY      required. Like as "user/repository"
     -n, --number=PULL_REQUEST_NUMBER required
         --post-comment=true or false dafault=false
 ```
