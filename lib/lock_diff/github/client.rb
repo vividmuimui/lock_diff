@@ -6,9 +6,8 @@ module LockDiff
 
     class << self
       def client
-        Github::Client.new(Github::AccessToken.new)
+        @client ||= Github::Client.new(Github::AccessToken.new)
       end
-      memoize :client
     end
 
     class Client

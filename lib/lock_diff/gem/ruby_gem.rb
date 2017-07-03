@@ -18,9 +18,8 @@ module LockDiff
       end
 
       def github_url
-        Github::GithubUrlDetector.new([source_code_url, homepage_url]).call
+        @github_url ||= Github::GithubUrlDetector.new([source_code_url, homepage_url]).call
       end
-      memoize :github_url
 
     end
   end

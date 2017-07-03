@@ -1,7 +1,6 @@
 require "logger"
 require "forwardable"
 
-require "lock_diff/core_ext/memoize"
 require "lock_diff/formatter/github_markdown"
 require "lock_diff/gem"
 require "lock_diff/github"
@@ -10,7 +9,7 @@ require "lock_diff/version"
 
 module LockDiff
   class << self
-    attr_accessor :client_class, :formatter, :strategy, :memoize_response, :logger
+    attr_accessor :client_class, :formatter, :strategy, :logger
 
     def client
       client_class.client
@@ -32,6 +31,5 @@ module LockDiff
   self.client_class = Github
   self.formatter = Formatter::GithubMarkdown
   self.strategy = Gem
-  self.memoize_response = true
   self.logger = Logger.new(nil)
 end
