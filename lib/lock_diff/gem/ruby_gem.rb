@@ -14,11 +14,28 @@ module LockDiff
         content = HTTPClient.get_content("https://rubygems.org/api/v1/gems/#{name}.json")
         @ruby_gem = OpenStruct.new(JSON.parse(content))
       rescue => e
-        LockDiff.logger.warn("Could not fetch gem info of #{@spec.full_name} because of #{e.inspect}")
+        LockDiff.logger.warn("Could not fetch gem info of #{name} because of #{e.inspect}")
+        @ruby_gem = NullRubyGem.new(name)
       end
 
       def github_url
         @github_url ||= Github::GithubUrlDetector.new([source_code_url, homepage_url]).call
+      end
+
+    end
+
+    class NullRubyGem
+      def initialize(name)
+        @name = name
+      end
+
+      def homepage_url
+      end
+
+      def source_code_url
+      end
+
+      def github_url
       end
 
     end
