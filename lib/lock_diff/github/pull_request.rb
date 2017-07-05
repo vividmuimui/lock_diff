@@ -13,6 +13,18 @@ module LockDiff
       def head_sha
         @pr.head.sha
       end
+
+      def base_ref
+        @pr.base.ref
+      end
+
+      def head_ref
+        @pr.head.ref
+      end
+
+      def number
+        @pr.number
+      end
     end
   end
 end

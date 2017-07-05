@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require "lock_diff"
+require "optparse"
+
+options = {
+  post_comment: false
+}
+opt = OptionParser.new
+
+opt.on('-r', '--repository=REPOSITORY', 'required. Like as "user/repository"') { |v| options[:repository] = v }
+opt.on('--post-comment=true or false', '(default=false. Print result to stdout when false.)') { |v| options[:post_comment] = v }
+opt.parse!
+
+unless options[:repository]
+  $stdout.puts opt.help
+else
+  LockDiff.run_by_latest_tachikoma(options)
+end

@@ -24,6 +24,11 @@ module LockDiff
         Github::PullRequest.new(@client.pull_request(repository, number))
       end
 
+      def latest_pull_request(repository, limit: 3)
+        @client.pull_requests(repository).first(limit).
+          map { |pull_request| Github::PullRequest.new(pull_request) }
+      end
+
       def pull_request_content_path(repository, number, file_name)
         content = @client.pull_request_files(repository, number).
           find { |file| file.filename.include?(file_name) }

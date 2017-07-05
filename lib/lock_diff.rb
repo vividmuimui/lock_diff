@@ -26,10 +26,20 @@ module LockDiff
         $stdout.puts result
       end
     end
+
+    def run_by_latest_tachikoma(repository:, post_comment: false)
+      pr = Github.client.latest_pull_request(repository, limit: 10).
+        find { |pull_request| pull_request.head_ref.include?("tachikoma") }
+      if pr
+        run(repository: repository, number: pr.number, post_comment: post_comment)
+      else
+        LockDiff.logger.info("Not found pull request by tachikoma.")
+      end
+    end
   end
 
   self.client_class = Github
   self.formatter = Formatter::GithubMarkdown
   self.strategy = Gem
-  self.logger = Logger.new(nil)
+  self.logger = Logger.new($stdout)
 end

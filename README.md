@@ -61,6 +61,31 @@ require 'lock_diff'
 LockDiff.run(repository: "vividmuimui/rails_tutorial", number: 26, post_comment: false)
 ```
 
+### For Tachikoma pull request
+
+When used in conjunction with [tachikoma](https://rubygems.org/gems/tachikoma), use the `lock_diff_for_tachikoma` command instead of `lock_diff`.
+`lock_diff_for_tachikoma` automatically detects and comments on the most recent tachikoma pull request.
+
+#### Command line
+
+```sh
+$ lock_diff
+Usage: lock_diff_for_tachikoma [options]
+    -r, --repository=REPOSITORY      required. Like as "user/repository"
+        --post-comment=true or false default=false
+```
+
+```sh
+$ lock_diff_for_tachikoma -r "vividmuimui/rails_tutorial" --post-comment=false
+```
+
+#### Ruby
+
+```ruby
+require 'lock_diff'
+LockDiff.lock_diff_for_tachikoma(repository: "vividmuimui/rails_tutorial", post_comment: false)
+```
+
 ## Development
 
 TODO:
@@ -76,4 +101,3 @@ The gem is available as open source under the terms of the [MIT License](http://
 ## Code of Conduct
 
 Everyone interacting in the LockDiff project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/lock_diff/blob/master/CODE_OF_CONDUCT.md).
-
