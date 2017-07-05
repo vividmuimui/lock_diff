@@ -10,7 +10,7 @@ opt = OptionParser.new
 
 opt.on('-r', '--repository=REPOSITORY', 'required. Like as "user/repository"') { |v| options[:repository] = v }
 opt.on('-n', '--number=PULL_REQUEST_NUMBER', 'required') { |v| options[:number] = v }
-opt.on('--post-comment=true or false', 'dafault=false') { |v| options[:post_comment] = v }
+opt.on('--post-comment=true or false', '(default=false. Print result to stdout when false.)') { |v| options[:post_comment] = v }
 opt.parse!
 
 unless options[:repository] && options[:number]

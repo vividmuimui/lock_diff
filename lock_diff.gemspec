@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["vividmuimui"]
   spec.email         = ["vivid.muimui@gmail.com"]
 
-  spec.summary       = %q{Generate links by Gemfile.lock of Github PR, and post comment to it.}
-  spec.description   = %q{Generate links by Gemfile.lock of Github PR, and post comment to it.}
+  spec.summary       = %q{This gem detects changes to your package manager (e.g. Gemfile) and generates a Markdown-formatted diff.}
+  spec.description   = %q{This gem detects changes to your package manager (e.g. Gemfile) and generates a Markdown-formatted diff.}
   # spec.homepage      = "https://github.com/vividmuimui/lock_diff"
   spec.homepage      = ""
   spec.license       = "MIT"

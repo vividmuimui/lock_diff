@@ -2,7 +2,12 @@
 
 [![CircleCI](https://circleci.com/gh/vividmuimui/lock_diff.svg?style=svg)](https://circleci.com/gh/vividmuimui/lock_diff)
 
-This Gem is generates `changelog url`, `github compare link` by lock file of Github pull request. And comment to pull request.
+This gem detects changes to your package manager (e.g. Gemfile) and generates a Markdown-formatted diff including:
+
+* links to the corresponding package's change logs
+* Github `...`-delineated diff links for the relevant changes
+
+It also optionally posts the diff as a comment to the pull request responsible for the package update.
 
 Like this.
 
@@ -31,7 +36,7 @@ Or install it yourself as:
 
 ## Usage
 
-Require `GITHUB_ACCESS_TOKEN` environment.
+lock_diff requires you to provide a `GITHUB_ACCESS_TOKEN` as an environment variable.
 
 ### Command line
 
@@ -40,8 +45,10 @@ $ lock_diff
 Usage: lock_diff [options]
     -r, --repository=REPOSITORY      required. Like as "user/repository"
     -n, --number=PULL_REQUEST_NUMBER required
-        --post-comment=true or false dafault=false
+        --post-comment=true or false (default=false. Print result to stdout when false.)
 ```
+
+For example, to comment on https://github.com/vividmuimui/rails_tutorial/pull/26#issuecomment-312491272, run this command:
 
 ```sh
 $ lock_diff -r "vividmuimui/rails_tutorial" -n 26 --post-comment=false
@@ -69,3 +76,4 @@ The gem is available as open source under the terms of the [MIT License](http://
 ## Code of Conduct
 
 Everyone interacting in the LockDiff project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/lock_diff/blob/master/CODE_OF_CONDUCT.md).
+
