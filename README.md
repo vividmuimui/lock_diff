@@ -1,5 +1,6 @@
 # LockDiff
 
+[![Gem Version](https://badge.fury.io/rb/lock_diff.svg)](https://badge.fury.io/rb/lock_diff)
 [![CircleCI](https://circleci.com/gh/vividmuimui/lock_diff.svg?style=svg)](https://circleci.com/gh/vividmuimui/lock_diff)
 
 This gem detects changes to your package manager (e.g. Gemfile) and generates a Markdown-formatted diff including:
