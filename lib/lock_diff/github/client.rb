@@ -47,9 +47,9 @@ module LockDiff
         end
       end
 
-      def tag_names(repository)
+      def tag_names(repository, options = {})
         return [] unless repository
-        @client.tags(repository).map(&:name)
+        @client.tags(repository, options).map(&:name)
       end
 
       def add_comment(repository, number, comment)

@@ -19,10 +19,6 @@ module LockDiff
         Github::RepositoryNameDetector.new(@ruby_gem.github_url).call
       end
 
-      def tag_names
-        @tag_names ||= LockDiff.client.tag_names(repository)
-      end
-
     end
   end
 end
