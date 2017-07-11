@@ -15,7 +15,7 @@ module LockDiff
       end
 
       def to_s
-        ref || version.to_s
+        revision || version.to_s
       end
 
       private
