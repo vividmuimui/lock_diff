@@ -4,7 +4,7 @@ module LockDiff
       extend Forwardable
 
       attr_reader :old_version, :new_version
-      def_delegators :@gem, :name, :url, :change_log_url
+      def_delegators :@gem, :name, :url, :change_log_url, :change_log_name
 
       def self.by(old_spec:, new_spec:)
         gem = Gem.new(new_spec.name)

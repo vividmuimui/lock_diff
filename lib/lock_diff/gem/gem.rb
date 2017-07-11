@@ -19,6 +19,10 @@ module LockDiff
         @change_log_url ||= Github::ChangeLogUrlFinder.new(repository: repository, github_url: @ruby_gem.github_url).call
       end
 
+      def change_log_name
+        File.basename(change_log_url)
+      end
+
       def repository
         Github::RepositoryNameDetector.new(@ruby_gem.github_url).call
       end

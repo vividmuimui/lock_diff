@@ -59,7 +59,7 @@ module LockDiff
 
         def change_log
           if diff_info.change_log_url
-            "[change log](#{diff_info.change_log_url})"
+            "[#{diff_info.change_log_name}](#{diff_info.change_log_url})"
           else
             ""
           end
