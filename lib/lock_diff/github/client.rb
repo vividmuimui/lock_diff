@@ -24,8 +24,8 @@ module LockDiff
         Github::PullRequest.new(@client.pull_request(repository, number))
       end
 
-      def latest_pull_request(repository, limit: 3)
-        @client.pull_requests(repository).first(limit).
+      def latest_pull_request(repository)
+        @client.pull_requests(repository).
           map { |pull_request| Github::PullRequest.new(pull_request) }
       end
 
