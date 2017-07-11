@@ -41,5 +41,5 @@ module LockDiff
   self.client_class = Github
   self.formatter = Formatter::GithubMarkdown
   self.strategy = Gem
-  self.logger = Logger.new($stdout)
+  self.logger = Logger.new($stdout, level: :info)
 end
