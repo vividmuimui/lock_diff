@@ -28,7 +28,7 @@ module LockDiff
     end
 
     def run_by_latest_tachikoma(repository:, post_comment: false)
-      pr = Github.client.latest_pull_request(repository, limit: 10).
+      pr = Github.client.latest_pull_request(repository).
         find { |pull_request| pull_request.head_ref.include?("tachikoma") }
       if pr
         run(repository: repository, number: pr.number, post_comment: post_comment)
