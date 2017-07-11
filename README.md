@@ -70,7 +70,7 @@ When used in conjunction with [tachikoma](https://rubygems.org/gems/tachikoma), 
 #### Command line
 
 ```sh
-$ lock_diff
+$ lock_diff_for_tachikoma
 Usage: lock_diff_for_tachikoma [options]
     -r, --repository=REPOSITORY      required. Like as "user/repository"
         --post-comment=true or false default=false
