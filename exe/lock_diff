@@ -1,20 +1,7 @@
 #!/usr/bin/env ruby
 
 require "lock_diff"
-require "optparse"
-Version = LockDiff::VERSION # for optparse
-options = {
-  post_comment: false
-}
-opt = OptionParser.new
+require "lock_diff/option_parser"
 
-opt.on('-r', '--repository=REPOSITORY', 'required. Like as "user/repository"') { |v| options[:repository] = v }
-opt.on('-n', '--number=PULL_REQUEST_NUMBER', 'required') { |v| options[:number] = v }
-opt.on('--post-comment=true or false', '(default=false. Print result to stdout when false.)') { |v| options[:post_comment] = v }
-opt.parse!
-
-unless options[:repository] && options[:number]
-  $stdout.puts opt.help
-else
-  LockDiff.run(options)
-end
+options = LockDiff::OptionParser.parse(ARGV, require_flags: %i(repository number))
+LockDiff.run(options)
