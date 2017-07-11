@@ -2,7 +2,7 @@
 
 require "lock_diff"
 require "optparse"
-
+Version = LockDiff::VERSION # for optparse
 options = {
   post_comment: false
 }
