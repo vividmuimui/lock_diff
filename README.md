@@ -48,9 +48,14 @@ lock_diff requires you to provide a `GITHUB_ACCESS_TOKEN` as an environment vari
 ```sh
 $ lock_diff
 Usage: lock_diff [options]
-    -r, --repository=REPOSITORY      required. Like as "user/repository"
-    -n, --number=PULL_REQUEST_NUMBER required
-        --post-comment=true or false (default=false. Print result to stdout when false.)
+Require flags
+    -r, --repository=REPOSITORY      Like as "user/repository"
+    -n, --number=PULL_REQUEST_NUMBER
+
+Optional flags
+        --post-comment=true or false Print result to stdout when false. (default is false)
+    -v, --verbose                    Run verbosely
+        --version                    Show version
 ```
 
 For example, to comment on https://github.com/vividmuimui/rails_tutorial/pull/26#issuecomment-312491272, run this command:
@@ -76,8 +81,13 @@ When used in conjunction with [tachikoma](https://rubygems.org/gems/tachikoma), 
 ```sh
 $ lock_diff_for_tachikoma
 Usage: lock_diff_for_tachikoma [options]
-    -r, --repository=REPOSITORY      required. Like as "user/repository"
-        --post-comment=true or false default=false
+Require flags
+    -r, --repository=REPOSITORY      Like as "user/repository"
+
+Optional flags
+        --post-comment=true or false Print result to stdout when false. (default is false)
+    -v, --verbose                    Run verbosely
+        --version                    Show version
 ```
 
 ```sh
