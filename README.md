@@ -1,7 +1,11 @@
 # LockDiff
 
 [![Gem Version](https://badge.fury.io/rb/lock_diff.svg)](https://badge.fury.io/rb/lock_diff)
+[![GitHub tag](https://img.shields.io/github/tag/vividmuimui/lock_diff.svg)](https://github.com/vividmuimui/lock_diff/tags)
 [![Build Status](https://travis-ci.org/vividmuimui/lock_diff.svg?branch=master)](https://travis-ci.org/vividmuimui/lock_diff)
+[![Dependency Status](https://gemnasium.com/badges/github.com/vividmuimui/lock_diff.svg)](https://gemnasium.com/github.com/vividmuimui/lock_diff)
+[![Code Climate](https://codeclimate.com/github/vividmuimui/lock_diff/badges/gpa.svg)](https://codeclimate.com/github/vividmuimui/lock_diff)
+[![Issue Count](https://codeclimate.com/github/vividmuimui/lock_diff/badges/issue_count.svg)](https://codeclimate.com/github/vividmuimui/lock_diff)
 
 This gem detects changes to your package manager (e.g. Gemfile) and generates a Markdown-formatted diff including:
 
