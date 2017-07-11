@@ -10,9 +10,10 @@ module LockDiff
         news
       )
 
-      def initialize(repository:, github_url:)
+      def initialize(repository:, github_url:, ref:)
         @repository = repository
         @github_url = github_url
+        @ref = ref
       end
 
       def call
@@ -22,7 +23,7 @@ module LockDiff
       private
 
       def find_change_log_url
-        Github.client.contents(@repository).
+        Github.client.contents(@repository, ref: @ref).
           select(&:file?).
           find { |content|
             name = content.name.downcase.delete('_')

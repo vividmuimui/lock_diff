@@ -40,9 +40,9 @@ module LockDiff
         @client.releases(repository).empty?
       end
 
-      def contents(repository)
+      def contents(repository, options = {})
         return [] unless repository
-        @client.contents(repository).map do |content|
+        @client.contents(repository, options).map do |content|
           Content.new(content)
         end
       end

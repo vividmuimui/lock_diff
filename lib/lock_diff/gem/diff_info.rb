@@ -4,7 +4,7 @@ module LockDiff
       extend Forwardable
 
       attr_reader :old_version, :new_version
-      def_delegators :@gem, :name, :url, :change_log_url, :change_log_name
+      def_delegators :@gem, :name, :url
 
       def self.by(old_spec:, new_spec:)
         gem = Gem.new(new_spec.name)
@@ -24,6 +24,18 @@ module LockDiff
       def changed?
         @old_version.revision != @new_version.revision ||
           @old_version.version != @new_version.version
+      end
+
+      def change_log_url
+        @change_log_url ||= Github::ChangeLogUrlFinder.new(
+          repository: @gem.repository,
+          github_url: @gem.github_url,
+          ref: @new_version.ref
+        ).call
+      end
+
+      def change_log_name
+        File.basename(change_log_url)
       end
 
       def diff_url
