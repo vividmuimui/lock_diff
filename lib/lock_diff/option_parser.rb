@@ -38,7 +38,6 @@ module LockDiff
       if @require_flags.all? { |flag| options.has_key?(flag) }
         options
       else
-        puts options
         $stdout.puts opt.help
         exit
       end
