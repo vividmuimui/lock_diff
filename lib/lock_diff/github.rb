@@ -5,6 +5,7 @@ require_relative "github/content"
 require_relative "github/github_url_detector"
 require_relative "github/pull_request"
 require_relative "github/repository_name_detector"
+require_relative "github/tag_finder"
 
 module LockDiff
   module Github
