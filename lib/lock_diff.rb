@@ -33,7 +33,7 @@ module LockDiff
       if pr
         run(repository: repository, number: pr.number, post_comment: post_comment)
       else
-        LockDiff.logger.info("Not found pull request by tachikoma.")
+        LockDiff.logger.info("Not found pull request by tachikoma. (Hint: search pull request by whether branch name includes 'tachikoma'")
       end
     end
   end
