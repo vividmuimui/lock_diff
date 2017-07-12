@@ -43,6 +43,10 @@ module LockDiff
         "#{@gem.github_url}/compare/#{@old_version.ref}...#{@new_version.ref}"
       end
 
+      def compare_url_text
+        "#{old_version}...#{new_version}"
+      end
+
     end
   end
 end

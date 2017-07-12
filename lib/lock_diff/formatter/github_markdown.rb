@@ -51,9 +51,9 @@ module LockDiff
 
         def diff_text
           if diff_info.compare_url
-            "[#{diff_info.old_version}...#{diff_info.new_version}](#{diff_info.compare_url})"
+            "[#{diff_info.compare_url_text}](#{diff_info.compare_url})"
           else
-            "#{diff_info.old_version}...#{diff_info.new_version}"
+            diff_info.compare_url_text
           end
         end
 
