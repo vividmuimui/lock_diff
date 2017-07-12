@@ -38,7 +38,7 @@ module LockDiff
         File.basename(change_log_url)
       end
 
-      def diff_url
+      def compare_url
         return unless @gem.github_url && @old_version.ref && @new_version.ref
         "#{@gem.github_url}/compare/#{@old_version.ref}...#{@new_version.ref}"
       end
