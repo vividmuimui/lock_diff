@@ -16,8 +16,8 @@ It also optionally posts the diff as a comment to the pull request responsible f
 
 Like this.
 
-> https://github.com/vividmuimui/rails_tutorial/pull/26#issuecomment-312491272
-> ![image](https://user-images.githubusercontent.com/1803598/27770516-f5774972-5f7a-11e7-87a6-7c3cbf1de745.png)
+> https://github.com/vividmuimui/lock_diff_sample/pull/9#issuecomment-315140796
+> ![image](https://user-images.githubusercontent.com/1803598/28178302-eeef61f4-6838-11e7-8c41-bd13195bef6d.png)
 
 ## Strategies
 
@@ -58,17 +58,17 @@ Optional flags
         --version                    Show version
 ```
 
-For example, to comment on https://github.com/vividmuimui/rails_tutorial/pull/26#issuecomment-312491272, run this command:
+For example, to comment on https://github.com/vividmuimui/lock_diff_sample/pull/9#issuecomment-315140796, run this command:
 
 ```sh
-$ lock_diff -r "vividmuimui/rails_tutorial" -n 26 --post-comment=false
+$ lock_diff -r "vividmuimui/lock_diff_sample" -n 9 --post-comment=false
 ```
 
 ### Ruby
 
 ```ruby
 require 'lock_diff'
-LockDiff.run(repository: "vividmuimui/rails_tutorial", number: 26, post_comment: false)
+LockDiff.run(repository: "vividmuimui/lock_diff_sample", number: 9, post_comment: false)
 ```
 
 ### For Tachikoma pull request
@@ -91,14 +91,14 @@ Optional flags
 ```
 
 ```sh
-$ lock_diff_for_tachikoma -r "vividmuimui/rails_tutorial" --post-comment=false
+$ lock_diff_for_tachikoma -r "vividmuimui/lock_diff_sample" --post-comment=false
 ```
 
 #### Ruby
 
 ```ruby
 require 'lock_diff'
-LockDiff.lock_diff_for_tachikoma(repository: "vividmuimui/rails_tutorial", post_comment: false)
+LockDiff.lock_diff_for_tachikoma(repository: "vividmuimui/lock_diff_sample", post_comment: false)
 ```
 
 ## Development
