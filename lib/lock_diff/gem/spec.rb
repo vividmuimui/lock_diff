@@ -21,5 +21,20 @@ module LockDiff
       end
 
     end
+
+    class NullSpec
+      attr_reader :name
+      def initialize(name)
+        @name = name
+      end
+
+      def revision
+      end
+
+      def version
+        nil
+      end
+    end
+
   end
 end

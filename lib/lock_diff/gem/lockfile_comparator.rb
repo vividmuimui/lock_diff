@@ -15,12 +15,15 @@ module LockDiff
 
       def call
         old_specs_by_name = Spec.specs_by(@old_lockfile).map { |spec| [spec.name, spec] }.to_h
+        new_specs_by_name = Spec.specs_by(@new_lockfile).map { |spec| [spec.name, spec] }.to_h
+        names = (old_specs_by_name.keys + new_specs_by_name.keys).uniq
 
-        Spec.specs_by(@new_lockfile).select { |new_spec|
-          old_specs_by_name[new_spec.name]
-        }.map { |new_spec|
-          DiffInfo.by(old_spec: old_specs_by_name[new_spec.name], new_spec: new_spec)
-        }.compact.select(&:changed?)
+        names.map { |name|
+          DiffInfo.by(
+            old_spec: old_specs_by_name[name] || NullSpec.new(name),
+            new_spec: new_specs_by_name[name] || NullSpec.new(name)
+          )
+        }.select(&:changed?)
       end
     end
   end

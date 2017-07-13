@@ -18,8 +18,8 @@ module LockDiff
 
       def headers
         [
-          "| gem_name | diff | change log |",
-          "|----------|------|------------|"
+          "| name | status | commits | changelog |",
+          "|------|--------|---------|-----------|"
         ]
       end
 
@@ -36,7 +36,8 @@ module LockDiff
         def call
           text = []
           text << name
-          text << diff_text
+          text << status
+          text << commits_text
           text << change_log
           "| #{text.join(' | ')} |"
         end
@@ -45,15 +46,19 @@ module LockDiff
 
         attr_reader :diff_info
 
+        def status
+          diff_info.status_emoji
+        end
+
         def name
           "[#{diff_info.name}](#{diff_info.url})"
         end
 
-        def diff_text
-          if diff_info.compare_url
-            "[#{diff_info.compare_url_text}](#{diff_info.compare_url})"
+        def commits_text
+          if diff_info.commits_url
+            "[#{diff_info.commits_url_text}](#{diff_info.commits_url})"
           else
-            diff_info.compare_url_text
+            diff_info.commits_url_text
           end
         end
 

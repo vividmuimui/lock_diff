@@ -1,6 +1,7 @@
 require "logger"
 require "forwardable"
 
+require "lock_diff/diff_info"
 require "lock_diff/formatter/github_markdown"
 require "lock_diff/gem"
 require "lock_diff/github"
