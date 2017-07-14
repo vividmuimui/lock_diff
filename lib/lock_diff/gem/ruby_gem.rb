@@ -29,10 +29,10 @@ module LockDiff
         @name = name
       end
 
-      def homepage_url
+      def homepage_uri
       end
 
-      def source_code_url
+      def source_code_uri
       end
 
       def github_url
