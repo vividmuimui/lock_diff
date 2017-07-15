@@ -37,10 +37,14 @@ module LockDiff
         LockDiff.logger.warn("Not found pull request by tachikoma. (Hint: search pull request by whether branch name includes 'tachikoma'")
       end
     end
-  end
 
-  self.client_class = Github
-  self.formatter = Formatter::GithubMarkdown
-  self.strategy = Gem
-  self.logger = Logger.new($stdout, level: :warn)
+    def init!
+      self.client_class = Github
+      self.formatter = Formatter::GithubMarkdown
+      self.strategy = Gem
+      self.logger = Logger.new($stdout, level: :warn)
+    end
+  end
 end
+
+LockDiff.init!
