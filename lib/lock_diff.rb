@@ -10,16 +10,24 @@ require "lock_diff/version"
 
 module LockDiff
   class << self
-    attr_accessor :client_class, :formatter, :strategy, :logger
+    attr_accessor :config
+
+    def init!
+      self.config = Config.new
+    end
 
     def client
-      client_class.client
+      config.client_class.client
+    end
+
+    def logger
+      config.logger
     end
 
     def run(repository:, number:, post_comment: false)
       pr = PullRequest.new(repository: repository, number: number)
-      lockfile_diff_infos = strategy.lock_file_diffs(pr)
-      result = formatter.format(lockfile_diff_infos)
+      lockfile_diff_infos = config.strategy.lock_file_diffs(pr)
+      result = config.formatter.format(lockfile_diff_infos)
 
       if post_comment
         client.add_comment(repository, number, result)
@@ -38,11 +46,15 @@ module LockDiff
       end
     end
 
-    def init!
-      self.client_class = Github
-      self.formatter = Formatter::GithubMarkdown
-      self.strategy = Gem
-      self.logger = Logger.new($stdout, level: :warn)
+    class Config
+      attr_accessor :client_class, :formatter, :strategy, :logger
+
+      def initialize
+        @client_class = Github
+        @formatter = Formatter::GithubMarkdown
+        @strategy = Gem
+        @logger = Logger.new($stdout, level: :warn)
+      end
     end
   end
 end
