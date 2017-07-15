@@ -1,8 +1,9 @@
 module LockDiff
-  module Gem
+  module Github
     class PrLockfile
-      def initialize(pull_request)
+      def initialize(pull_request, lockfile_name)
         @pr = pull_request
+        @lockfile_name = lockfile_name
       end
 
       def changed?
@@ -10,7 +11,7 @@ module LockDiff
       end
 
       def path
-        @path ||= @pr.find_content_path("Gemfile.lock")
+        @path ||= @pr.find_content_path(@lockfile_name)
       end
 
       def base_file
