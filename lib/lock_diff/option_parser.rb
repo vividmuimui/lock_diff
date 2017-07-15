@@ -28,7 +28,8 @@ module LockDiff
 
       opt.separator("\nOptional flags")
       opt.on('--post-comment=true or false', 'Print result to stdout when false. (default is false)') { |v| options[:post_comment] = v }
-      opt.on("-v", "--verbose", "Run verbosely") { |v| LockDiff.logger.level = :debug }
+      opt.on("-v", "--verbose", "Run verbosely") { LockDiff.logger.level = :info }
+      opt.on("--move-verbose", "Run move verbosely") { LockDiff.logger.level = :debug }
       opt.on_tail("--version", "Show version") do
         $stdout.puts LockDiff::VERSION
         exit

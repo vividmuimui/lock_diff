@@ -34,7 +34,7 @@ module LockDiff
       if pr
         run(repository: repository, number: pr.number, post_comment: post_comment)
       else
-        LockDiff.logger.info("Not found pull request by tachikoma. (Hint: search pull request by whether branch name includes 'tachikoma'")
+        LockDiff.logger.warn("Not found pull request by tachikoma. (Hint: search pull request by whether branch name includes 'tachikoma'")
       end
     end
   end
@@ -42,5 +42,5 @@ module LockDiff
   self.client_class = Github
   self.formatter = Formatter::GithubMarkdown
   self.strategy = Gem
-  self.logger = Logger.new($stdout, level: :info)
+  self.logger = Logger.new($stdout, level: :warn)
 end

@@ -29,7 +29,7 @@ module LockDiff
 
       class DiffFormmater
         def initialize(diff_info)
-          LockDiff.logger.debug diff_info.name
+          LockDiff.logger.info { diff_info.name }
           @diff_info = diff_info
         end
 
