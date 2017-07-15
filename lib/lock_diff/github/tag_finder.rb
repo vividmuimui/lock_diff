@@ -1,9 +1,9 @@
 module LockDiff
   module Github
     class TagFinder
-      def initialize(repository:, gem_name:, version_str:)
+      def initialize(repository:, package_name:, version_str:)
         @repository = repository
-        @gem_name = gem_name
+        @package_name = package_name
         @version_str = version_str
       end
 
@@ -20,13 +20,13 @@ module LockDiff
         tag = fetched_tags.find do |tag_name|
           tag_name == @version_str ||
             tag_name == "v#{@version_str}" ||
-            tag_name == "#{@gem_name}-#{@version_str}"
+            tag_name == "#{@package_name}-#{@version_str}"
         end
 
         if tag
           return tag
         else
-          LockDiff.logger.debug { "Not found tag of #{@gem_name}, #{@version_str} by page: #{page}, per_page: #{per_page}"}
+          LockDiff.logger.debug { "Not found tag of #{@package_name}, #{@version_str} by page: #{page}, per_page: #{per_page}"}
           unless fetched_tags.count < per_page
             find_tag(page: page + 1, limit: limit, per_page: per_page)
           end

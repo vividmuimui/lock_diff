@@ -1,7 +1,7 @@
 require "bundler"
 require_relative "gem/diff_info"
-require_relative "gem/gem"
 require_relative "gem/lockfile_comparator"
+require_relative "gem/package"
 require_relative "gem/pr_lockfile"
 require_relative "gem/ruby_gem"
 require_relative "gem/spec"

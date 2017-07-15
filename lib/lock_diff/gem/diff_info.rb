@@ -4,24 +4,24 @@ module LockDiff
       extend Forwardable
 
       attr_reader :old_version, :new_version
-      def_delegators :@gem, :name, :url
+      def_delegators :@package, :name, :url
       def_delegators :@diff_info, :changed?, :status, :status_emoji, :change_log_url, :change_log_name, :commits_url, :commits_url_text
 
       def self.by(old_spec:, new_spec:)
-        gem = Gem.new(new_spec.name)
+        package = Package.new(new_spec.name)
         new(
-          gem: gem,
-          old_version: Version.new(gem: gem, spec: old_spec),
-          new_version: Version.new(gem: gem, spec: new_spec)
+          package: package,
+          old_version: Version.new(package: package, spec: old_spec),
+          new_version: Version.new(package: package, spec: new_spec)
         )
       end
 
-      def initialize(gem:, old_version:, new_version:)
-        @gem = gem
+      def initialize(package:, old_version:, new_version:)
+        @package = package
         @diff_info = LockDiff::DiffInfo.new(
           old_version: old_version,
           new_version: new_version,
-          package: gem
+          package: package
         )
       end
 

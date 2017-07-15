@@ -6,8 +6,8 @@ module LockDiff
 
       def_delegators :@spec, :revision, :version
 
-      def initialize(gem:, spec:)
-        @gem = gem
+      def initialize(package:, spec:)
+        @package = package
         @spec = spec
       end
 
@@ -38,8 +38,8 @@ module LockDiff
         return unless version
         return @git_tag if defined? @git_tag
         @git_tag = Github::TagFinder.new(
-          repository: @gem.repository,
-          gem_name: @gem.name,
+          repository: @package.repository,
+          package_name: @package.name,
           version_str: version.to_s
         ).call
       end

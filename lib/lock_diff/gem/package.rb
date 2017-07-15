@@ -1,6 +1,6 @@
 module LockDiff
   module Gem
-    class Gem
+    class Package
       extend Forwardable
 
       attr_reader :name
@@ -17,6 +17,8 @@ module LockDiff
       def repository
         Github::RepositoryNameDetector.new(ruby_gem.github_url).call
       end
+
+      private
 
       def ruby_gem
         @ruby_gem ||= RubyGem.new(name)
