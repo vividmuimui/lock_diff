@@ -5,11 +5,10 @@ module LockDiff
     DELETE    = 'delete'
     NEW       = 'new'
 
-    def initialize(old_version:, new_version:, repository:, github_url:)
+    def initialize(old_version:, new_version:, package:)
       @old_version = old_version
       @new_version = new_version
-      @repository = repository
-      @github_url = github_url
+      @package = package
     end
 
     def changed?
@@ -55,8 +54,8 @@ module LockDiff
           end
 
         Github::ChangeLogUrlFinder.new(
-          repository: @repository,
-          github_url: @github_url,
+          repository: @package.repository,
+          github_url: @package.github_url,
           ref: ref
         ).call
       end
@@ -67,7 +66,7 @@ module LockDiff
     end
 
     def commits_url
-      return unless @github_url
+      return unless @package.github_url
       old_ref = @old_version.ref
       new_ref = @new_version.ref
       commits_url =
@@ -82,7 +81,7 @@ module LockDiff
           "commits/#{new_ref}"
         end
 
-      "#{@github_url}/#{commits_url}"
+      "#{@package.github_url}/#{commits_url}"
     end
 
     def commits_url_text

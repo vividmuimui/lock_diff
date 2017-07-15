@@ -21,8 +21,7 @@ module LockDiff
         @diff_info = LockDiff::DiffInfo.new(
           old_version: old_version,
           new_version: new_version,
-          github_url: gem.github_url,
-          repository: gem.repository
+          package: gem
         )
       end
 
