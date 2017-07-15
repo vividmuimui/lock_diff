@@ -72,16 +72,16 @@ module LockDiff
       commits_url =
         case status
         when UPGRADE
-          "compare/#{old_ref}...#{new_ref}"
+          "compare/#{old_ref}...#{new_ref}" if old_ref && new_ref
         when DOWNGRADE
-          "compare/#{new_ref}...#{old_ref}"
+          "compare/#{new_ref}...#{old_ref}" if old_ref && new_ref
         when DELETE
-          "commits/#{old_ref}"
+          "commits/#{old_ref}" if old_ref
         when NEW
-          "commits/#{new_ref}"
+          "commits/#{new_ref}" if new_ref
         end
 
-      "#{@package.github_url}/#{commits_url}"
+      "#{@package.github_url}/#{commits_url}" if commits_url
     end
 
     def commits_url_text
