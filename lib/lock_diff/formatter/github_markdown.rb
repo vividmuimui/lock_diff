@@ -38,7 +38,7 @@ module LockDiff
           text << name
           text << status
           text << commits_text
-          text << change_log
+          text << changelog
           "| #{text.join(' | ')} |"
         end
 
@@ -62,9 +62,9 @@ module LockDiff
           end
         end
 
-        def change_log
-          if diff_info.change_log_url
-            "[#{diff_info.change_log_name}](#{diff_info.change_log_url})"
+        def changelog
+          if diff_info.changelog_url
+            "[#{diff_info.changelog_name}](#{diff_info.changelog_url})"
           else
             ""
           end

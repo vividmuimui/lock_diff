@@ -1,6 +1,6 @@
 module LockDiff
   module Github
-    class ChangeLogUrlFinder
+    class ChangelogUrlFinder
       CHANGE_LOG_CANDIDATES = %w(
         changelog
         changes

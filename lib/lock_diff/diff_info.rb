@@ -43,8 +43,8 @@ module LockDiff
       end
     end
 
-    def change_log_url
-      @change_log_url ||= begin
+    def changelog_url
+      @changelog_url ||= begin
         ref =
           case status
           when UPGRADE, NEW
@@ -53,7 +53,7 @@ module LockDiff
             nil # default branch(master)
           end
 
-        Github::ChangeLogUrlFinder.new(
+        Github::ChangelogUrlFinder.new(
           repository: @package.repository,
           github_url: @package.github_url,
           ref: ref
@@ -61,8 +61,8 @@ module LockDiff
       end
     end
 
-    def change_log_name
-      File.basename(change_log_url)
+    def changelog_name
+      File.basename(changelog_url)
     end
 
     def commits_url

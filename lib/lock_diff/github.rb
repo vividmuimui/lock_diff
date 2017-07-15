@@ -1,5 +1,5 @@
 require_relative "github/access_token"
-require_relative "github/change_log_url_finder"
+require_relative "github/changelog_url_finder"
 require_relative "github/client"
 require_relative "github/content"
 require_relative "github/github_url_detector"

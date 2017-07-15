@@ -5,7 +5,7 @@ module LockDiff
 
       attr_reader :old_version, :new_version
       def_delegators :@package, :name, :url
-      def_delegators :@diff_info, :changed?, :status, :status_emoji, :change_log_url, :change_log_name, :commits_url, :commits_url_text
+      def_delegators :@diff_info, :changed?, :status, :status_emoji, :changelog_url, :changelog_name, :commits_url, :commits_url_text
 
       def self.by(old_spec:, new_spec:)
         package = Package.new(new_spec.name)
