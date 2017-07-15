@@ -1,32 +1,45 @@
 module LockDiff
   class DiffInfo
+    extend Forwardable
+
     UPGRADE   = 'upgrade'
     DOWNGRADE = 'downgrade'
     DELETE    = 'delete'
     NEW       = 'new'
 
-    def initialize(old_version:, new_version:, package:)
-      @old_version = old_version
-      @new_version = new_version
-      @package = package
+    attr_reader :old_package, :new_package
+    def_delegators :package, :name, :url
+
+    def initialize(old_package:, new_package:)
+      @old_package = old_package
+      @new_package = new_package
     end
 
     def changed?
-      @old_version.different?(@new_version)
+      @old_package.different?(@new_package)
     end
 
     def status
       case
-      when @old_version.version && @new_version.version
-        if @old_version.version < @new_version.version
+      when @old_package.version && @new_package.version
+        if @old_package.version < @new_package.version
           UPGRADE
         else
           DOWNGRADE
         end
-      when @old_version.version
+      when @old_package.version
         DELETE
-      when @new_version.version
+      when @new_package.version
         NEW
+      end
+    end
+
+    def package
+      case status
+      when UPGRADE, NEW
+        @new_package
+      when DOWNGRADE, DELETE
+        @old_package
       end
     end
 
@@ -48,14 +61,14 @@ module LockDiff
         ref =
           case status
           when UPGRADE, NEW
-            @new_version.ref
+            @new_package.ref
           when DOWNGRADE, DELETE
             nil # default branch(master)
           end
 
         Github::ChangelogUrlFinder.new(
-          repository: @package.repository,
-          github_url: @package.github_url,
+          repository: package.repository,
+          github_url: package.github_url,
           ref: ref
         ).call
       end
@@ -66,9 +79,9 @@ module LockDiff
     end
 
     def commits_url
-      return unless @package.github_url
-      old_ref = @old_version.ref
-      new_ref = @new_version.ref
+      return unless package.github_url
+      old_ref = @old_package.ref
+      new_ref = @new_package.ref
       commits_url =
         case status
         when UPGRADE
@@ -81,19 +94,19 @@ module LockDiff
           "commits/#{new_ref}" if new_ref
         end
 
-      "#{@package.github_url}/#{commits_url}" if commits_url
+      "#{package.github_url}/#{commits_url}" if commits_url
     end
 
     def commits_url_text
       case status
       when UPGRADE
-        "#{@old_version}...#{@new_version}"
+        "#{@old_package.version_str}...#{@new_package.version_str}"
       when DOWNGRADE
-        "#{@new_version}...#{@old_version}"
+        "#{@new_package.version_str}...#{@old_package.version_str}"
       when DELETE
-        "#{@old_version}"
+        "#{@old_package.version_str}"
       when NEW
-        "#{@new_version}"
+        "#{@new_package.version_str}"
       end
     end
 

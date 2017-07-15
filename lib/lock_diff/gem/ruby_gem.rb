@@ -1,5 +1,6 @@
 require "httpclient"
 require 'ostruct'
+require 'json'
 
 module LockDiff
   module Gem

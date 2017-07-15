@@ -3,11 +3,23 @@ module LockDiff
     class Package
       extend Forwardable
 
-      attr_reader :name
+      def_delegators :@spec, :name, :revision, :version
       def_delegator :ruby_gem, :github_url
 
-      def initialize(name)
-        @name = name
+      def initialize(spec)
+        @spec = spec
+      end
+
+      def ref
+        revision || git_tag
+      end
+
+      def version_str
+        revision || version.to_s
+      end
+
+      def different?(other)
+        revision != other.revision || version != other.version
       end
 
       def url
@@ -21,7 +33,17 @@ module LockDiff
       private
 
       def ruby_gem
-        @ruby_gem ||= RubyGem.new(name)
+        @ruby_gem ||= RubyGemRepository.find(name)
+      end
+
+      def git_tag
+        return unless version
+        return @git_tag if defined? @git_tag
+        @git_tag = Github::TagFinder.new(
+          repository: repository,
+          package_name: name,
+          version_str: version.to_s
+        ).call
       end
 
     end

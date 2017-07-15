@@ -20,6 +20,10 @@ module LockDiff
         @spec.git_version&.strip
       end
 
+      def to_package
+        Package.new(self)
+      end
+
     end
 
     class NullSpec
@@ -33,6 +37,10 @@ module LockDiff
 
       def version
         nil
+      end
+
+      def to_package
+        Package.new(self)
       end
     end
 

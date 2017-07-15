@@ -19,10 +19,9 @@ module LockDiff
         names = (old_specs_by_name.keys + new_specs_by_name.keys).uniq
 
         names.map { |name|
-          LockDiff.logger.debug { "Gnerate diff info of #{name}" }
-          DiffInfo.by(
-            old_spec: old_specs_by_name[name] || NullSpec.new(name),
-            new_spec: new_specs_by_name[name] || NullSpec.new(name)
+          DiffInfo.new(
+            old_package: (old_specs_by_name[name] || NullSpec.new(name)).to_package,
+            new_package: (new_specs_by_name[name] || NullSpec.new(name)).to_package
           )
         }.select(&:changed?)
       end
