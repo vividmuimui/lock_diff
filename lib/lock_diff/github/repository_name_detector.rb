@@ -1,7 +1,7 @@
 module LockDiff
   module Github
     class RepositoryNameDetector
-      REGEXP = %r!github\.com/([^/]+)/([^/]+)!
+      REGEXP = %r!github\.com[/:](.*?)(?:.git)?\z!
 
       def initialize(url)
         @url = url
@@ -9,8 +9,9 @@ module LockDiff
 
       def call
         return unless @url
-        _, repo_owner, repo_name = @url.match(REGEXP).to_a
-        "#{repo_owner}/#{repo_name}"
+        @url.match(REGEXP).to_a.last.
+          split("/").first(2).
+          join("/")
       end
 
     end

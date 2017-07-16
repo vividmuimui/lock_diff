@@ -3,8 +3,7 @@ module LockDiff
     class Package
       extend Forwardable
 
-      def_delegators :@spec, :name, :revision, :version
-      def_delegator :ruby_gem, :github_url
+      def_delegators :@spec, :name, :revision, :version, :github_url
 
       def initialize(spec)
         @spec = spec
@@ -23,18 +22,14 @@ module LockDiff
       end
 
       def url
-        ruby_gem.github_url || ruby_gem.homepage_url
+        @spec.github_url || @spec.homepage_url
       end
 
       def repository
-        Github::RepositoryNameDetector.new(ruby_gem.github_url).call
+        Github::RepositoryNameDetector.new(@spec.github_url).call
       end
 
       private
-
-      def ruby_gem
-        @ruby_gem ||= RubyGemRepository.find(name)
-      end
 
       def git_tag
         return unless version

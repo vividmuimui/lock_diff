@@ -3,7 +3,8 @@ require "httpclient"
 module LockDiff
   module Github
     class GithubUrlDetector
-      REGEXP = %r!https?://([^/]+)\.github\.[^/]+/([^/]+)! # github.com, github.io
+      # xxx.github.aaa/yyyy
+      REGEXP = %r!https?://([^/]+)\.github\.[^/]+/([^/]+)!
 
       def initialize(urls)
         @urls = Array(urls).compact
@@ -13,8 +14,13 @@ module LockDiff
         url = @urls.find { |url| url.include?("github.com") }
         return unless url
 
-        response = HTTPClient.get(url, follow_redirect: true)
-        url = response.header.request_uri.to_s
+        begin
+          response = HTTPClient.get(url, follow_redirect: true)
+          url = response.header.request_uri.to_s
+        rescue
+          repository = RepositoryNameDetector.new(url).call
+          url = "https://github.com/#{repository}"
+        end
 
         if url.match?(REGEXP)
           _, owner, repo = url.match(REGEXP).to_a

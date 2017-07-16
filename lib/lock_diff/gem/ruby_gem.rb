@@ -8,9 +8,6 @@ module LockDiff
     class RubyGem
       extend Forwardable
 
-      def_delegator :@ruby_gem, :homepage_uri, :homepage_url
-      def_delegator :@ruby_gem, :source_code_uri, :source_code_url
-
       def initialize(name)
         content = HTTPClient.get_content("https://rubygems.org/api/v1/gems/#{name}.json")
         @ruby_gem = OpenStruct.new(JSON.parse(content))
@@ -21,6 +18,16 @@ module LockDiff
 
       def github_url
         @github_url ||= Github::GithubUrlDetector.new([source_code_url, homepage_url]).call
+      end
+
+      def homepage_url
+        @ruby_gem.homepage_uri
+      end
+
+      private
+
+      def source_code_url
+        @ruby_gem.source_code_uri
       end
 
     end
@@ -34,9 +41,6 @@ module LockDiff
       end
 
       def source_code_uri
-      end
-
-      def github_url
       end
 
     end

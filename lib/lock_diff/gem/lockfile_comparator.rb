@@ -14,8 +14,8 @@ module LockDiff
       end
 
       def call
-        old_specs_by_name = Spec.specs_by(@old_lockfile).map { |spec| [spec.name, spec] }.to_h
-        new_specs_by_name = Spec.specs_by(@new_lockfile).map { |spec| [spec.name, spec] }.to_h
+        old_specs_by_name = Spec.new(@old_lockfile).map { |spec| [spec.name, spec] }.to_h
+        new_specs_by_name = Spec.new(@new_lockfile).map { |spec| [spec.name, spec] }.to_h
         names = (old_specs_by_name.keys + new_specs_by_name.keys).uniq
 
         names.map { |name|

@@ -51,7 +51,11 @@ module LockDiff
         end
 
         def name
-          "[#{diff_info.name}](#{diff_info.url})"
+          if diff_info.url
+            "[#{diff_info.name}](#{diff_info.url})"
+          else
+            diff_info.name
+          end
         end
 
         def commits_text
