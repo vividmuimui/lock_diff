@@ -53,7 +53,8 @@ module LockDiff
         @client_class = Github
         @formatter = Formatter::GithubMarkdown
         @strategy = Gem
-        @logger = Logger.new($stdout, level: :warn)
+        @logger = Logger.new($stdout)
+        @logger.level = :warn
       end
     end
   end
