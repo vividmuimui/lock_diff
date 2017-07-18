@@ -22,7 +22,7 @@ module LockDiff
           url = "https://github.com/#{repository}"
         end
 
-        if url.match?(REGEXP)
+        if url.match(REGEXP)
           _, owner, repo = url.match(REGEXP).to_a
           url = "https://github.com/#{owner}/#{repo}"
           HTTPClient.get(url).ok? ? url : nil
