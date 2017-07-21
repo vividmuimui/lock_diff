@@ -10,9 +10,9 @@ module LockDiff
         news
       )
 
-      def initialize(repository:, github_url:, ref:)
+      def initialize(repository:, repository_url:, ref:)
         @repository = repository
-        @github_url = github_url
+        @repository_url = repository_url
         @ref = ref
       end
 
@@ -32,9 +32,9 @@ module LockDiff
       end
 
       def find_release_url
-        return unless @github_url
+        return unless @repository_url
         unless Github.client.exist_releases?(@repository)
-          @github_url + "/releases"
+          @repository_url + "/releases"
         end
       end
 

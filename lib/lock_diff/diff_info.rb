@@ -68,7 +68,7 @@ module LockDiff
 
         Github::ChangelogUrlFinder.new(
           repository: package.repository,
-          github_url: package.github_url,
+          repository_url: package.repository_url,
           ref: ref
         ).call
       end
@@ -79,7 +79,7 @@ module LockDiff
     end
 
     def commits_url
-      return unless package.github_url
+      return unless package.repository_url
       old_ref = @old_package.ref
       new_ref = @new_package.ref
       commits_url =
@@ -94,7 +94,7 @@ module LockDiff
           "commits/#{new_ref}" if new_ref
         end
 
-      "#{package.github_url}/#{commits_url}" if commits_url
+      "#{package.repository_url}/#{commits_url}" if commits_url
     end
 
     def commits_url_text

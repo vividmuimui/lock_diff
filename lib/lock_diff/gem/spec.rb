@@ -36,12 +36,12 @@ module LockDiff
           Package.new(self)
         end
 
-        def github_url; end
+        def repository_url; end
         def homepage_url; end
       end
 
       class RubyGemSpec < Base
-        def_delegators :ruby_gem, :github_url, :homepage_url
+        def_delegators :ruby_gem, :repository_url, :homepage_url
 
         private
 
@@ -51,8 +51,8 @@ module LockDiff
       end
 
       class GitSpec < Base
-        def github_url
-          @github_url ||= Github::GithubUrlDetector.new(@spec.source.uri).call
+        def repository_url
+          @repository_url ||= Github::UrlDetector.new(@spec.source.uri).call
         end
       end
 
@@ -74,7 +74,7 @@ module LockDiff
         nil
       end
 
-      def github_url; end
+      def repository_url; end
       def homepage_url; end
 
       def to_package

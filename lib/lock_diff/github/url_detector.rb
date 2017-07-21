@@ -2,7 +2,7 @@ require "httpclient"
 
 module LockDiff
   module Github
-    class GithubUrlDetector
+    class UrlDetector
       # xxx.github.aaa/yyyy
       REGEXP = %r!https?://([^/]+)\.github\.[^/]+/([^/]+)!
 

@@ -16,8 +16,8 @@ module LockDiff
         @ruby_gem = NullRubyGem.new(name)
       end
 
-      def github_url
-        @github_url ||= Github::GithubUrlDetector.new([source_code_url, homepage_url]).call
+      def repository_url
+        @repository_url ||= Github::UrlDetector.new([source_code_url, homepage_url]).call
       end
 
       def homepage_url
