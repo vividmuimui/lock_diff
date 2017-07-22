@@ -25,6 +25,18 @@ module LockDiff
       def number
         @pr.number
       end
+
+      def repository
+        @pr.base.repo.full_name
+      end
+
+      def find_content_path(file_name)
+        Github.client.pull_request_content_path(repository, number, file_name)
+      end
+
+      def add_comment(comment)
+        Github.client.add_comment(repository, number, comment)
+      end
     end
   end
 end

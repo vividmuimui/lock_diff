@@ -16,41 +16,43 @@ module LockDiff
       self.config = Config.new
     end
 
-    def client
-      config.client_class.client
-    end
-
     def logger
       config.logger
     end
 
     def run(repository:, number:, post_comment: false)
-      pr = PullRequest.new(repository: repository, number: number)
-      lockfile_diff_infos = config.strategy.lock_file_diffs(pr)
-      result = config.formatter.format(lockfile_diff_infos)
-
-      if post_comment
-        client.add_comment(repository, number, result)
-      else
-        $stdout.puts result
-      end
+      pr = PullRequest.find_by(repository: repository, number: number)
+      _run(pull_request: pr, post_comment: post_comment)
     end
 
     def run_by_latest_tachikoma(repository:, post_comment: false)
-      pr = Github.client.latest_pull_request(repository).
-        find { |pull_request| pull_request.head_ref.include?("tachikoma") }
+      pr = PullRequest.latest_by_tachikoma(repository)
       if pr
-        run(repository: repository, number: pr.number, post_comment: post_comment)
+        LockDiff.logger.info { "Running on repository: #{pr.repository}, number: #{pr.number}"}
+        _run(pull_request: pr, post_comment: post_comment)
       else
         LockDiff.logger.warn("Not found pull request by tachikoma. (Hint: search pull request by whether branch name includes 'tachikoma'")
       end
     end
 
+    private
+
+    def _run(pull_request:, post_comment: false)
+      lockfile_diff_infos = config.strategy.lock_file_diffs(pull_request)
+      result = config.formatter.format(lockfile_diff_infos)
+
+      if post_comment
+        pull_request.add_comment(result)
+      else
+        $stdout.puts result
+      end
+    end
+
     class Config
-      attr_accessor :client_class, :formatter, :strategy, :logger
+      attr_accessor :pr_repository_service, :formatter, :strategy, :logger
 
       def initialize
-        @client_class = Github
+        @pr_repository_service = Github
         @formatter = Formatter::GithubMarkdown
         @strategy = Gem
         @logger = Logger.new($stdout)

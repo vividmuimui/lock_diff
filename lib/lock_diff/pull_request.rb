@@ -1,29 +1,20 @@
 module LockDiff
   class PullRequest
-    attr_reader :repository, :number
+    extend Forwardable
 
-    class NotFoundPullRequest < StandardError; end
+    class << self
+      def find_by(repository:, number:)
+        LockDiff.config.pr_repository_service.client.pull_request(repository, number)
+      rescue => e
+        message = "Not found pull request by (repository: #{repository}, number: #{number}, client: #{LockDiff.client.class}). Becase of #{e.inspect}"
+        LockDiff.logger.warn(message)
+        raise NotFoundPullRequest.new(message)
+      end
 
-    def initialize(repository:, number:)
-      @repository = repository
-      @number = number
-      @pr = LockDiff.client.pull_request(repository, number)
-    rescue => e
-      message = "Not found pull request by (repository: #{repository}, number: #{number}, client: #{LockDiff.client.class}). Becase of #{e.inspect}"
-      LockDiff.logger.warn(message)
-      raise NotFoundPullRequest.new(message)
-    end
-
-    def base_sha
-      @pr.base_sha
-    end
-
-    def head_sha
-      @pr.head_sha
-    end
-
-    def find_content_path(file_name)
-      LockDiff.client.pull_request_content_path(@repository, @number, file_name)
+      def latest_by_tachikoma(repository)
+        LockDiff.config.pr_repository_service.client.newer_pull_requests(repository).
+          find { |pull_request| pull_request.head_ref.include?("tachikoma") }
+      end
     end
 
   end
