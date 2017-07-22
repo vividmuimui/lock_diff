@@ -16,7 +16,7 @@ module LockDiff
       def find_tag(page: 1, limit:, per_page:)
         return nil if page > limit
 
-        fetched_tags = LockDiff.client.tag_names(@repository, page: page, per_page: per_page)
+        fetched_tags = Github.client.tag_names(@repository, page: page, per_page: per_page)
         tag = fetched_tags.find do |tag_name|
           tag_name == @version_str ||
             tag_name == "v#{@version_str}" ||

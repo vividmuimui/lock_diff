@@ -15,11 +15,11 @@ module LockDiff
       end
 
       def base_file
-        @base_file ||= LockDiff.client.file(@pr.repository, path: path, ref: @pr.base_sha)
+        @base_file ||= Github.client.file(@pr.repository, path: path, ref: @pr.base_sha)
       end
 
       def head_file
-        @head_file ||= LockDiff.client.file(@pr.repository, path: path, ref: @pr.head_sha)
+        @head_file ||= Github.client.file(@pr.repository, path: path, ref: @pr.head_sha)
       end
 
     end
