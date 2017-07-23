@@ -16,16 +16,13 @@ module LockDiff
       def find_tag(page: 1, limit:, per_page:)
         return nil if page > limit
 
-        fetched_tags = Github.client.tag_names(@repository, page: page, per_page: per_page)
+        fetched_tags = TagsRepository.find(@repository, page: page, per_page: per_page)
         tag = fetched_tags.find { |tag_name| match_rule?(tag_name) }
 
-        if tag
-          return tag
-        else
-          LockDiff.logger.debug { "Not found tag of #{@package_name}, #{@version_str} by page: #{page}, per_page: #{per_page}"}
-          unless fetched_tags.count < per_page
-            find_tag(page: page + 1, limit: limit, per_page: per_page)
-          end
+        return tag if tag
+
+        unless fetched_tags.count < per_page
+          find_tag(page: page + 1, limit: limit, per_page: per_page)
         end
       end
 
@@ -37,6 +34,27 @@ module LockDiff
           "#{@package_name.downcase}-#{@version_str}"
         ].include?(tag_name)
       end
+
+      class TagsRepository
+        class << self
+          def find(repo_name, options = {})
+            key = "#{repo_name}-#{options[:page]}"
+            ruby_gem = repository[key]
+            return ruby_gem if repository.has_key?(key)
+            repository[key] = fetch(repo_name, options)
+          end
+
+          def fetch(repo_name, options = {})
+            LockDiff.logger.debug { "Fetch tags #{repo_name}, #{options}"}
+            Github.client.tag_names(repo_name, options)
+          end
+
+          def repository
+            @repository ||= {}
+          end
+        end
+      end
+
     end
   end
 end

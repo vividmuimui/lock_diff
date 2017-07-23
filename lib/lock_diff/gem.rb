@@ -2,7 +2,6 @@ require "bundler"
 require_relative "gem/lockfile_comparator"
 require_relative "gem/package"
 require_relative "gem/ruby_gem"
-require_relative "gem/ruby_gem_repository"
 require_relative "gem/spec"
 
 module LockDiff

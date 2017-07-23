@@ -46,7 +46,7 @@ module LockDiff
         private
 
         def ruby_gem
-          @ruby_gem ||= RubyGemRepository.find(@spec.name)
+          @ruby_gem ||= RubyGem.new(@spec.name)
         end
       end
 
