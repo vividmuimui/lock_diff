@@ -5,6 +5,7 @@ require "lock_diff/diff_info"
 require "lock_diff/formatter/github_markdown"
 require "lock_diff/gem"
 require "lock_diff/github"
+require "lock_diff/lockfile_comparator"
 require "lock_diff/pull_request"
 require "lock_diff/version"
 
@@ -38,7 +39,7 @@ module LockDiff
     private
 
     def _run(pull_request:, post_comment: false)
-      lockfile_diff_infos = config.strategy.lock_file_diffs(pull_request)
+      lockfile_diff_infos = LockfileComparator.compare_by(pull_request)
       result = config.formatter.format(lockfile_diff_infos)
 
       if post_comment
@@ -47,17 +48,17 @@ module LockDiff
         $stdout.puts result
       end
     end
+  end
 
-    class Config
-      attr_accessor :pr_repository_service, :formatter, :strategy, :logger
+  class Config
+    attr_accessor :pr_repository_service, :formatter, :strategy, :logger
 
-      def initialize
-        @pr_repository_service = Github
-        @formatter = Formatter::GithubMarkdown
-        @strategy = Gem
-        @logger = Logger.new($stdout)
-        @logger.level = :warn
-      end
+    def initialize
+      @pr_repository_service = Github
+      @formatter = Formatter::GithubMarkdown
+      @strategy = Gem
+      @logger = Logger.new($stdout)
+      @logger.level = :warn
     end
   end
 end

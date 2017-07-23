@@ -6,14 +6,6 @@ module LockDiff
         @pr = pull_request
       end
 
-      def base_sha
-        @pr.base.sha
-      end
-
-      def head_sha
-        @pr.head.sha
-      end
-
       def base_ref
         @pr.base.ref
       end
@@ -36,6 +28,14 @@ module LockDiff
 
       def add_comment(comment)
         Github.client.add_comment(repository, number, comment)
+      end
+
+      def base_file(path)
+        Github.client.file(repository, path: path, ref: @pr.base.sha)
+      end
+
+      def head_file(path)
+        Github.client.file(repository, path: path, ref: @pr.head.sha)
       end
     end
   end

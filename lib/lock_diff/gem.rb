@@ -7,14 +7,13 @@ require_relative "gem/spec"
 module LockDiff
   module Gem
     class << self
-      class NotChangedLockfile < StandardError; end
-
-      def lock_file_diffs(pull_request)
-        pr_lockfile = Github::PrLockfile.new(pull_request, 'Gemfile.lock')
-        raise NotChangedLockfile unless pr_lockfile.changed?
-        LockfileComparator.compare_by(pr_lockfile)
+      def lockfile_name
+        'Gemfile.lock'
       end
 
+      def lockfile_comparator
+        LockfileComparator
+      end
     end
   end
 end
