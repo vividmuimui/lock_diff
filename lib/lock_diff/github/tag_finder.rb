@@ -1,10 +1,10 @@
 module LockDiff
   module Github
     class TagFinder
-      def initialize(repository:, package_name:, version_str:)
+      def initialize(repository:, package_name:, version:)
         @repository = repository
         @package_name = package_name
-        @version_str = version_str
+        @version_str = version.to_s
       end
 
       def call
@@ -17,11 +17,7 @@ module LockDiff
         return nil if page > limit
 
         fetched_tags = Github.client.tag_names(@repository, page: page, per_page: per_page)
-        tag = fetched_tags.find do |tag_name|
-          tag_name == @version_str ||
-            tag_name == "v#{@version_str}" ||
-            tag_name == "#{@package_name}-#{@version_str}"
-        end
+        tag = fetched_tags.find { |tag_name| match_rule?(tag_name) }
 
         if tag
           return tag
@@ -33,6 +29,14 @@ module LockDiff
         end
       end
 
+      def match_rule?(tag_name)
+        [
+          @version_str,
+          "v#{@version_str}",
+          "#{@package_name}-#{@version_str}",
+          "#{@package_name.downcase}-#{@version_str}"
+        ].include?(tag_name)
+      end
     end
   end
 end

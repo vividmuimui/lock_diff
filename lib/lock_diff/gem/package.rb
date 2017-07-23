@@ -37,7 +37,7 @@ module LockDiff
         @git_tag = Github::TagFinder.new(
           repository: repository,
           package_name: name,
-          version_str: version.to_s
+          version: version
         ).call
       end
 
