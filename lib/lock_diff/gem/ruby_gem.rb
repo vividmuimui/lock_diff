@@ -20,6 +20,10 @@ module LockDiff
         @ruby_gem.homepage_uri
       end
 
+      def url
+        @ruby_gem.project_uri
+      end
+
       private
 
       def source_code_url
@@ -59,6 +63,9 @@ module LockDiff
       end
 
       def source_code_uri
+      end
+
+      def project_uri
       end
 
     end

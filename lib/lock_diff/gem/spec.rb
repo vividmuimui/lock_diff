@@ -38,10 +38,12 @@ module LockDiff
 
         def repository_url; end
         def homepage_url; end
+        def ruby_gem_url; end
       end
 
       class RubyGemSpec < Base
         def_delegators :ruby_gem, :repository_url, :homepage_url
+        def_delegator :ruby_gem, :url, :ruby_gem_url
 
         private
 
@@ -76,6 +78,7 @@ module LockDiff
 
       def repository_url; end
       def homepage_url; end
+      def ruby_gem_url; end
 
       def to_package
         Package.new(self)

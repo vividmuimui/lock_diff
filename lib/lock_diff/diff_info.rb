@@ -8,7 +8,8 @@ module LockDiff
     NEW       = 'new'
 
     attr_reader :old_package, :new_package
-    def_delegators :package, :name, :url
+    def_delegators :package, :name, :repository_url
+    def_delegator :package, :url, :package_url
 
     def initialize(old_package:, new_package:)
       @old_package = old_package

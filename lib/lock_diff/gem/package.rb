@@ -4,6 +4,7 @@ module LockDiff
       extend Forwardable
 
       def_delegators :@spec, :name, :revision, :version, :repository_url
+      def_delegator :@spec, :ruby_gem_url, :url
 
       def initialize(spec)
         @spec = spec
@@ -19,10 +20,6 @@ module LockDiff
 
       def different?(other)
         revision != other.revision || version != other.version
-      end
-
-      def url
-        @spec.repository_url || @spec.homepage_url
       end
 
       def repository

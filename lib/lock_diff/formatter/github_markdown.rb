@@ -18,8 +18,8 @@ module LockDiff
 
       def headers
         [
-          "| name | status | commits | changelog |",
-          "|------|--------|---------|-----------|"
+          "| package | repo | status | commits | changelog |",
+          "|---------|:----:|:------:|---------|-----------|"
         ]
       end
 
@@ -35,7 +35,8 @@ module LockDiff
 
         def call
           text = []
-          text << name
+          text << package
+          text << repository
           text << status
           text << commits_text
           text << changelog
@@ -50,11 +51,19 @@ module LockDiff
           diff_info.status_emoji
         end
 
-        def name
-          if diff_info.url
-            "[#{diff_info.name}](#{diff_info.url})"
+        def package
+          if diff_info.package_url
+            "[#{diff_info.name}](#{diff_info.package_url})"
           else
             diff_info.name
+          end
+        end
+
+        def repository
+          if diff_info.repository_url
+            "[:octocat:](#{diff_info.repository_url})"
+          else
+            ''
           end
         end
 
