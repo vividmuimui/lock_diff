@@ -1,5 +1,6 @@
 # LockDiff
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d05b439bc5064e30ad84ecfa8e57b448)](https://www.codacy.com/app/vividmuimui/lock_diff?utm_source=github.com&utm_medium=referral&utm_content=vividmuimui/lock_diff&utm_campaign=badger)
 [![Gem Version](https://badge.fury.io/rb/lock_diff.svg)](https://badge.fury.io/rb/lock_diff)
 [![GitHub tag](https://img.shields.io/github/tag/vividmuimui/lock_diff.svg)](https://github.com/vividmuimui/lock_diff/tags)
 [![Build Status](https://travis-ci.org/vividmuimui/lock_diff.svg?branch=master)](https://travis-ci.org/vividmuimui/lock_diff)
