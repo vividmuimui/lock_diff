@@ -1,6 +1,9 @@
 language: ruby
 rvm:
-  - 2.3.4
-  - 2.4.1
+- 2.3.4
+- 2.4.1
 script:
-  - bundle exec rspec
+- bundle exec rspec
+notifications:
+  slack:
+    secure: DKSdr5uEtNXGpAARGV+Q694eNv9IGi30RjSIjk8lRZrmLxE0WJbk/17FkmjgVF2w1onO/knFWgCiPBoIncihy4hh6nfAJZDaRI8AwXqYGGi10KeUBu4309r/7SL60KnFUFsQ9o47tar09TY6HS55IesNjN2/mKIEJlpw2c7McPz58rIzlFizTW5OPShsfWQnuLAz9iUYjknZfrntirav+mwkqVKqDZoMM7MRzedk1KjlkRbun/EVrgMEYPqsbpmhfYV0DZkcymorhH6d/FBsrWeqB7QMT6KwROMBHDZGeGzYgaN3KgjZV35gw6pK2VlsETm7E/Fk9Imrjalq87Q28aqX5nq/MR6Llo9yfE4J7PkGOTxcvZlXqp/W+2xT/8Ne6Dy29gb/7TeJY9K4nmkbkrmkanKBBmvIjbhwT46BOPjn1Sz4kbceoZNgihI2hMMPypH61+U6v0eUcGLuxRyDaUsyrgRnBEDHFZHMpfZ1eE7uXnCO9IvqGm5Tn4goP0s67H98CFhP+j3cIM2HKdns6ZyGsAHVakw7bnB90mKc9bIaaPSKEyZZD4MpkJxnMxR453OlSwJZIXesIkbBJMZA4wdOAsPQSBaSCY2w566LsUs4izRVLpdeILa/NOaxb+l1OvmejGyiihUjSUfH7fiIhoD5E0+SgOsDIdd0TV17rb4=
