@@ -9,7 +9,6 @@ module LockDiff
         @diff_infos = diff_infos
       end
 
-
       def call
         (headers + body).join("\n")
       end

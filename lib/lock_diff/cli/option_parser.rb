@@ -37,7 +37,7 @@ module LockDiff
         end
         opt.parse!(args)
 
-        if @require_flags.all? { |flag| options.has_key?(flag) }
+        if @require_flags.all? { |flag| options.key?(flag) }
           options
         else
           $stdout.puts opt.help

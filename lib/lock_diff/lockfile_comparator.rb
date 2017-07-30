@@ -3,7 +3,7 @@ module LockDiff
     class << self
       def compare_by(pull_request)
         file_path = pull_request.find_content_path(lockfile_name)
-        raise NotChangedLockfile unless !!file_path
+        raise NotChangedLockfile if file_path.nil?
 
         LockDiff.config.strategy.lockfile_comparator.new(
           old_lockfile: pull_request.base_file(file_path),
