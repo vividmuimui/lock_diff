@@ -23,7 +23,7 @@ module LockDiff
     def status
       case
       when @old_package.version && @new_package.version
-        if @old_package.version < @new_package.version
+        if @old_package.version <= @new_package.version
           UPGRADE
         else
           DOWNGRADE
