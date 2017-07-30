@@ -13,11 +13,7 @@ module LockDiff
       end
 
       def repository_url
-        @repository_url ||= Github::UrlDetector.new([source_code_url, homepage_url]).call
-      end
-
-      def homepage_url
-        @ruby_gem.homepage_uri
+        @repository_url ||= Github::UrlDetector.new([source_code_url, @ruby_gem.homepage_uri]).call
       end
 
       def url

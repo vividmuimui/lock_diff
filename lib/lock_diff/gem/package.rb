@@ -19,7 +19,7 @@ module LockDiff
       end
 
       def different?(other)
-        revision != other.revision || version != other.version
+        name != other.name || revision != other.revision || version != other.version
       end
 
       def repository

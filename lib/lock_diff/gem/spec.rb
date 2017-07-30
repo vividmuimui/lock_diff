@@ -4,8 +4,8 @@ module LockDiff
     module Spec
       class UnSupportSource < StandardError; end
 
-      def self.new(lockfile)
-        Bundler::LockfileParser.new(lockfile).specs.map do |lazy_specification|
+      class << self
+        def new(lazy_specification)
           case lazy_specification.source
           when Bundler::Source::Rubygems
             RubyGemSpec.new(lazy_specification)
@@ -17,6 +17,13 @@ module LockDiff
             raise UnSupportSource, "#{lazy_specification.source.class} source by #{lazy_specification.name} is not supported"
           end
         end
+
+        def parse(lockfile)
+          Bundler::LockfileParser.new(lockfile).specs.map do |lazy_specification|
+            new(lazy_specification)
+          end
+        end
+
       end
 
       class Base
@@ -37,12 +44,11 @@ module LockDiff
         end
 
         def repository_url; end
-        def homepage_url; end
         def ruby_gem_url; end
       end
 
       class RubyGemSpec < Base
-        def_delegators :ruby_gem, :repository_url, :homepage_url
+        def_delegators :ruby_gem, :repository_url
         def_delegator :ruby_gem, :url, :ruby_gem_url
 
         private
@@ -77,7 +83,6 @@ module LockDiff
       end
 
       def repository_url; end
-      def homepage_url; end
       def ruby_gem_url; end
 
       def to_package
