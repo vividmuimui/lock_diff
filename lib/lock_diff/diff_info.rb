@@ -23,7 +23,7 @@ module LockDiff
     def status
       case
       when @old_package.version && @new_package.version
-        if @old_package.version < @new_package.version
+        if @old_package.version <= @new_package.version
           UPGRADE
         else
           DOWNGRADE
@@ -83,7 +83,7 @@ module LockDiff
       return unless package.repository_url
       old_ref = @old_package.ref
       new_ref = @new_package.ref
-      commits_url =
+      compare_path =
         case status
         when UPGRADE
           "compare/#{old_ref}...#{new_ref}" if old_ref && new_ref
@@ -95,7 +95,7 @@ module LockDiff
           "commits/#{new_ref}" if new_ref
         end
 
-      "#{package.repository_url}/#{commits_url}" if commits_url
+      "#{package.repository_url}/#{compare_path}" if compare_path
     end
 
     def commits_url_text

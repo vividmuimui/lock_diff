@@ -40,7 +40,7 @@ module LockDiff
           def find(repo_name, options = {})
             key = "#{repo_name}-#{options[:page]}"
             ruby_gem = repository[key]
-            return ruby_gem if repository.has_key?(key)
+            return ruby_gem if repository.key?(key)
             repository[key] = fetch(repo_name, options)
           end
 

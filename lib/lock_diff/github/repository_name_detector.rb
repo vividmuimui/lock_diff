@@ -9,9 +9,9 @@ module LockDiff
 
       def call
         return unless @url
-        @url.match(REGEXP).to_a.last.
-          split("/").first(2).
-          join("/")
+        path = @url.match(REGEXP).to_a.last
+        return unless path
+        path.split("/").first(2).join("/")
       end
 
     end
