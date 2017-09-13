@@ -11,7 +11,8 @@ module LockDiff
         return unless @url
         path = @url.match(REGEXP).to_a.last
         return unless path
-        path.split("/").first(2).join("/")
+        repository_name = path.split("/").first(2).join("/")
+        repository_name if repository_name.match?(/.+\/.+/)
       end
 
     end
