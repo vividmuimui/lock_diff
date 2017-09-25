@@ -1,10 +1,9 @@
 module LockDiff
   class PullRequest
     extend Forwardable
+    class NotFoundPullRequest < StandardError; end
 
     class << self
-      class NotChangedLockfile < StandardError; end
-
       def find_by(repository:, number:)
         client.pull_request(repository, number)
       rescue => e

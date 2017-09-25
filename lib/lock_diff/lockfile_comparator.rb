@@ -1,5 +1,7 @@
 module LockDiff
   class LockfileComparator
+    class NotChangedLockfile < StandardError; end
+
     class << self
       def compare_by(pull_request)
         file_path = pull_request.find_content_path(lockfile_name)
