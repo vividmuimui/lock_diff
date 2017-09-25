@@ -8,7 +8,7 @@ module LockDiff
       def find_by(repository:, number:)
         client.pull_request(repository, number)
       rescue => e
-        message = "Not found pull request by (repository: #{repository}, number: #{number}, client: #{LockDiff.client.class}). Becase of #{e.inspect}"
+        message = "Not found pull request by (repository: #{repository}, number: #{number}, client: #{client.class}). Becase of #{e.inspect}"
         LockDiff.logger.warn(message)
         raise NotFoundPullRequest.new(message)
       end
