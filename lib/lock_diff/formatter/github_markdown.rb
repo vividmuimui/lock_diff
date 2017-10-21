@@ -10,7 +10,10 @@ module LockDiff
       end
 
       def call
-        (headers + body).join("\n")
+        _body = body
+        if _body
+          (headers + _body).join("\n")
+        end
       end
 
       private

@@ -40,6 +40,12 @@ module LockDiff
 
     def _run(pull_request:, post_comment: false)
       lockfile_diff_infos = LockfileComparator.compare_by(pull_request)
+
+      if lockfile_diff_infos.empty?
+        LockDiff.logger.info("Lock file is changed but changed gem does not exist.")
+        return
+      end
+
       result = config.formatter.format(lockfile_diff_infos)
 
       if post_comment
