@@ -1,7 +1,7 @@
 module LockDiff
   module Github
     class RepositoryNameDetector
-      REGEXP = %r!github\.com[/:](.*?)(?:.git)?\z!
+      REGEXP = %r!github\.com[/:](.*?)(?:\.git)?\z!
 
       def initialize(url)
         @url = url
