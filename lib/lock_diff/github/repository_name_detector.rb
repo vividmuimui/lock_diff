@@ -9,7 +9,7 @@ module LockDiff
 
       def call
         return unless @url
-        path = @url.match(REGEXP).to_a.last
+        path = @url.match(REGEXP).to_a.last&.split('#')&.first
         return unless path
         repository_name = path.split("/").first(2).join("/")
         repository_name if repository_name.match?(/.+\/.+/)
