@@ -147,4 +147,4 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## Code of Conduct
 
-Everyone interacting in the LockDiff project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/vividmuimuij/lock_diff/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the LockDiff project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/vividmuimui/lock_diff/blob/master/CODE_OF_CONDUCT.md).
