@@ -78,14 +78,13 @@ module LockDiff
         end
 
         def changelog
-          if diff_info.changelog_url
-            "[#{diff_info.changelog_name}](#{diff_info.changelog_url})"
+          if diff_info.changelog
+            "[#{diff_info.changelog.name}](#{diff_info.changelog.url})"
           else
             ""
           end
         end
       end
-
     end
   end
 end
