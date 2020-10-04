@@ -17,18 +17,18 @@ module LockDiff
       end
 
       def call
-        find_change_log_url || find_release_url
+        change_log_urls.push(find_release_url).compact
       end
 
       private
 
-      def find_change_log_url
+      def change_log_urls
         Github.client.contents(@repository, ref: @ref).
           select(&:file?).
-          find { |content|
+          select do |content|
             name = content.name.downcase.delete('_')
             CHANGE_LOG_CANDIDATES.any? { |candidate| name.start_with? candidate }
-          }&.html_url
+          end&.map(&:html_url)
       end
 
       def find_release_url

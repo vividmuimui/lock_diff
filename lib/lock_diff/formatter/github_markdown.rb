@@ -41,7 +41,7 @@ module LockDiff
           text << repository
           text << status
           text << commits_text
-          text << changelog
+          text << changelogs
           "| #{text.join(' | ')} |"
         end
 
@@ -77,15 +77,16 @@ module LockDiff
           end
         end
 
-        def changelog
-          if diff_info.changelog_url
-            "[#{diff_info.changelog_name}](#{diff_info.changelog_url})"
+        def changelogs
+          if diff_info.changelogs
+            diff_info.changelogs.map do |changelog|
+              "[#{changelog.name}](#{changelog.url})"
+            end.join(" ")
           else
             ""
           end
         end
       end
-
     end
   end
 end
