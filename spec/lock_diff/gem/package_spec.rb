@@ -5,8 +5,8 @@ module LockDiff
     RSpec.describe Spec do
       let(:test_data) { TestData::Gem.new }
       let(:spec_with_revision) { Spec.new(test_data.sample_git_source) }
-      let(:spec_with_git_tag) { Spec.new(test_data.lazy_specifications.find { |a| a.name == "brakeman"} ) }
-      let(:spec_without_ref) { Spec.new(test_data.lazy_specifications.find { |a| a.name == "minitest"} ) }
+      let(:spec_with_git_tag) { Spec.new(test_data.lazy_specifications.find { |a| a.name == "brakeman" }) }
+      let(:spec_without_ref) { Spec.new(test_data.lazy_specifications.find { |a| a.name == "dummy_gem" }) }
       let(:null_spec) { NullSpec.new("dummy") }
 
       describe '#ref', with_http: true do

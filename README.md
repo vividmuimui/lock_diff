@@ -1,13 +1,9 @@
 # LockDiff
 
 [![Gem Version](https://badge.fury.io/rb/lock_diff.svg)](https://badge.fury.io/rb/lock_diff)
-[![GitHub tag](https://img.shields.io/github/tag/vividmuimui/lock_diff.svg)](https://github.com/vividmuimui/lock_diff/tags)
 [![Build Status](https://travis-ci.org/vividmuimui/lock_diff.svg?branch=master)](https://travis-ci.org/vividmuimui/lock_diff)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d05b439bc5064e30ad84ecfa8e57b448)](https://www.codacy.com/app/vividmuimui/lock_diff?utm_source=github.com&utm_medium=referral&utm_content=vividmuimui/lock_diff&utm_campaign=badger)
-[![Dependency Status](https://gemnasium.com/badges/github.com/vividmuimui/lock_diff.svg)](https://gemnasium.com/github.com/vividmuimui/lock_diff)
 [![Code Climate](https://codeclimate.com/github/vividmuimui/lock_diff/badges/gpa.svg)](https://codeclimate.com/github/vividmuimui/lock_diff)
-[![Issue Count](https://codeclimate.com/github/vividmuimui/lock_diff/badges/issue_count.svg)](https://codeclimate.com/github/vividmuimui/lock_diff)
-[![ghit.me](https://ghit.me/badge.svg?repo=vividmuimui/lock_diff)](https://ghit.me/repo/vividmuimui/lock_diff)
 
 This gem detects changes to your package manager (e.g. Gemfile) and generates a Markdown-formatted diff including:
 
@@ -109,7 +105,7 @@ TODO:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/lock_diff. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/vividmuimui/lock_diff. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -117,7 +113,7 @@ The gem is available as open source under the terms of the [MIT License](http://
 
 ### Original
 
-Most source code in this pepository is by https://github.com/kyanny/compare_linker .
+Most of the source code in this repository is by https://github.com/kyanny/compare_linker.
 
 ```
 Copyright (c) 2014 Kensuke Nagae
@@ -147,4 +143,4 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## Code of Conduct
 
-Everyone interacting in the LockDiff project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/lock_diff/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the LockDiff project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/vividmuimui/lock_diff/blob/master/CODE_OF_CONDUCT.md).

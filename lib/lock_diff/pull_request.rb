@@ -13,8 +13,10 @@ module LockDiff
       end
 
       def latest_by_tachikoma(repository)
-        client.newer_pull_requests(repository).
-          find { |pull_request| pull_request.head_ref.include?("tachikoma") }
+        client.newer_pull_requests(repository).find do |pull_request|
+          branch = pull_request.head_ref
+          branch.include?("tachikoma") || branch.include?("bundle-update")
+        end
       end
 
       private

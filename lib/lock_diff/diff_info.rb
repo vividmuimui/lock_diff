@@ -57,26 +57,16 @@ module LockDiff
       end
     end
 
-    def changelog_url
-      @changelog_url ||= begin
-        ref =
-          case status
-          when UPGRADE, NEW
-            @new_package.ref
-          when DOWNGRADE, DELETE
-            nil # default branch(master)
-          end
+    def changelogs
+      return nil if [DOWNGRADE, DELETE].include?(status)
 
-        Github::ChangelogUrlFinder.new(
-          repository: package.repository,
-          repository_url: package.repository_url,
-          ref: ref
-        ).call
+      Github::ChangelogUrlFinder.new(
+        repository: package.repository,
+        repository_url: package.repository_url,
+        ref: @new_package.ref
+      ).call.map do |url|
+        Changelog.new(url)
       end
-    end
-
-    def changelog_name
-      File.basename(changelog_url)
     end
 
     def commits_url
