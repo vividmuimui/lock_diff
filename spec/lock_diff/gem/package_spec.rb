@@ -12,7 +12,11 @@ module LockDiff
       describe '#ref', with_http: true do
         specify do
           expect(Package.new(spec_with_revision).ref).to eq spec_with_revision.revision
-          expect(Package.new(spec_with_git_tag).ref).to eq "v3.6.2"
+
+          VCR.use_cassette('brakeman') do
+            expect(Package.new(spec_with_git_tag).ref).to eq "v3.6.2"
+          end
+
           expect(Package.new(spec_without_ref).ref).to be_nil
         end
       end

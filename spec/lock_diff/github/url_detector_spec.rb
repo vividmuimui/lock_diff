@@ -11,8 +11,10 @@ module LockDiff
           'https://github.com/rr/rr.git',
           'https://github.com/rr/rr/foo/bar/baz',
         ]
-        urls.each do |url|
-          expect(UrlDetector.new(url).call).to eq 'https://github.com/rr/rr'
+        VCR.use_cassette('rr') do
+          urls.each do |url|
+            expect(UrlDetector.new(url).call).to eq 'https://github.com/rr/rr'
+          end
         end
       end
 
