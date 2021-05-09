@@ -1,15 +1,6 @@
 module LockDiff
   module Github
     class ChangelogUrlFinder
-      CHANGE_LOG_CANDIDATES = %w(
-        changelog
-        changes
-        history
-        releases
-        releasenote
-        news
-      )
-
       def initialize(repository:, repository_url:, ref:)
         @repository = repository
         @repository_url = repository_url
@@ -24,11 +15,8 @@ module LockDiff
 
       def change_log_urls
         Github.client.contents(@repository, ref: @ref).
-          select(&:file?).
-          select do |content|
-            name = content.name.downcase.delete('_')
-            CHANGE_LOG_CANDIDATES.any? { |candidate| name.start_with? candidate }
-          end&.map(&:html_url)
+          select(&:change_log?).
+          map(&:html_url)
       end
 
       def find_release_url
