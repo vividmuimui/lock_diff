@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "lock_diff"
+require "vcr"
 Dir[File.expand_path(File.dirname(__FILE__) + "/support/**/*.rb")].each(&method(:require))
 
 require 'codacy-coverage'
@@ -17,6 +18,11 @@ RSpec.configure do |config|
   end
 
   # config.filter_run_excluding with_http: true
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
 end
 
 LockDiff.logger.level = :debug
