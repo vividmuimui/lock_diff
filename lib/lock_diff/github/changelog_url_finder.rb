@@ -8,15 +8,13 @@ module LockDiff
       end
 
       def call
-        change_log_urls.push(find_release_url).compact
+        directory.change_log_urls.push(find_release_url).compact
       end
 
       private
 
-      def change_log_urls
-        Github.client.contents(@repository, ref: @ref).
-          select(&:change_log?).
-          map(&:html_url)
+      def directory
+        Directory.new(@repository, @ref)
       end
 
       def find_release_url
@@ -25,7 +23,6 @@ module LockDiff
           @repository_url + "/releases"
         end
       end
-
     end
   end
 end
