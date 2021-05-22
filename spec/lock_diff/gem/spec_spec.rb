@@ -53,11 +53,19 @@ module LockDiff
         it_behaves_like 'Gem::Spec'
 
         describe '#repository_url', with_http: true do
-          specify { expect(instance.repository_url).to be_start_with 'https://github.com' }
+          specify do
+            VCR.use_cassette('github.com') do
+              expect(instance.repository_url).to be_start_with 'https://github.com'
+            end
+          end
         end
 
         describe '#ruby_gem_url', with_http: true do
-          specify { expect(instance.ruby_gem_url).to be_start_with 'https://rubygems.org/gems/' }
+          specify do
+            VCR.use_cassette('rubygems.org') do
+              expect(instance.ruby_gem_url).to be_start_with 'https://rubygems.org/gems/'
+            end
+          end
         end
       end
 
