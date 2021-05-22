@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3?ref=version-3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.18.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - token f0d1005a546bf3c5881dfce4a39b1fd97a99c3ea
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 09 May 2021 19:10:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      Etag:
+      - W/"c29501793394ce0defe749c71e6165e83a19bd15"
+      Last-Modified:
+      - Sun, 09 May 2021 14:00:22 GMT
+      X-Oauth-Scopes:
+      - repo, workflow
+      X-Accepted-Oauth-Scopes:
+      - ''
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4996'
+      X-Ratelimit-Reset:
+      - '1620587579'
+      X-Ratelimit-Used:
+      - '4'
+      X-Ratelimit-Resource:
+      - core
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes,
+        X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, Deprecation,
+        Sunset
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Github-Request-Id:
+      - E6C5:5D92:5B0C98:692D73:609833BB
+    body:
+      encoding: ASCII-8BIT
+      string: '[{"name":"CHANGELOG.md","path":"gems/aws-sdk-s3/CHANGELOG.md","sha":"cc8dd719b8148624778d005aef177068963d44bb","size":19599,"url":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/CHANGELOG.md?ref=version-3","html_url":"https://github.com/aws/aws-sdk-ruby/blob/version-3/gems/aws-sdk-s3/CHANGELOG.md","git_url":"https://api.github.com/repos/aws/aws-sdk-ruby/git/blobs/cc8dd719b8148624778d005aef177068963d44bb","download_url":"https://raw.githubusercontent.com/aws/aws-sdk-ruby/version-3/gems/aws-sdk-s3/CHANGELOG.md","type":"file","_links":{"self":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/CHANGELOG.md?ref=version-3","git":"https://api.github.com/repos/aws/aws-sdk-ruby/git/blobs/cc8dd719b8148624778d005aef177068963d44bb","html":"https://github.com/aws/aws-sdk-ruby/blob/version-3/gems/aws-sdk-s3/CHANGELOG.md"}},{"name":"LICENSE.txt","path":"gems/aws-sdk-s3/LICENSE.txt","sha":"d645695673349e3947e8e5ae42332d0ac3164cd7","size":11358,"url":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/LICENSE.txt?ref=version-3","html_url":"https://github.com/aws/aws-sdk-ruby/blob/version-3/gems/aws-sdk-s3/LICENSE.txt","git_url":"https://api.github.com/repos/aws/aws-sdk-ruby/git/blobs/d645695673349e3947e8e5ae42332d0ac3164cd7","download_url":"https://raw.githubusercontent.com/aws/aws-sdk-ruby/version-3/gems/aws-sdk-s3/LICENSE.txt","type":"file","_links":{"self":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/LICENSE.txt?ref=version-3","git":"https://api.github.com/repos/aws/aws-sdk-ruby/git/blobs/d645695673349e3947e8e5ae42332d0ac3164cd7","html":"https://github.com/aws/aws-sdk-ruby/blob/version-3/gems/aws-sdk-s3/LICENSE.txt"}},{"name":"VERSION","path":"gems/aws-sdk-s3/VERSION","sha":"df83a51c6cb9a69892ecce1187badf8d49ac5864","size":7,"url":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/VERSION?ref=version-3","html_url":"https://github.com/aws/aws-sdk-ruby/blob/version-3/gems/aws-sdk-s3/VERSION","git_url":"https://api.github.com/repos/aws/aws-sdk-ruby/git/blobs/df83a51c6cb9a69892ecce1187badf8d49ac5864","download_url":"https://raw.githubusercontent.com/aws/aws-sdk-ruby/version-3/gems/aws-sdk-s3/VERSION","type":"file","_links":{"self":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/VERSION?ref=version-3","git":"https://api.github.com/repos/aws/aws-sdk-ruby/git/blobs/df83a51c6cb9a69892ecce1187badf8d49ac5864","html":"https://github.com/aws/aws-sdk-ruby/blob/version-3/gems/aws-sdk-s3/VERSION"}},{"name":"aws-sdk-s3.gemspec","path":"gems/aws-sdk-s3/aws-sdk-s3.gemspec","sha":"fe378797b76bf0e5475575f6c8b55db5b729356a","size":1277,"url":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/aws-sdk-s3.gemspec?ref=version-3","html_url":"https://github.com/aws/aws-sdk-ruby/blob/version-3/gems/aws-sdk-s3/aws-sdk-s3.gemspec","git_url":"https://api.github.com/repos/aws/aws-sdk-ruby/git/blobs/fe378797b76bf0e5475575f6c8b55db5b729356a","download_url":"https://raw.githubusercontent.com/aws/aws-sdk-ruby/version-3/gems/aws-sdk-s3/aws-sdk-s3.gemspec","type":"file","_links":{"self":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/aws-sdk-s3.gemspec?ref=version-3","git":"https://api.github.com/repos/aws/aws-sdk-ruby/git/blobs/fe378797b76bf0e5475575f6c8b55db5b729356a","html":"https://github.com/aws/aws-sdk-ruby/blob/version-3/gems/aws-sdk-s3/aws-sdk-s3.gemspec"}},{"name":"features","path":"gems/aws-sdk-s3/features","sha":"0a3c90b92cc45389352d677745fe5b53823fe0dd","size":0,"url":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/features?ref=version-3","html_url":"https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-s3/features","git_url":"https://api.github.com/repos/aws/aws-sdk-ruby/git/trees/0a3c90b92cc45389352d677745fe5b53823fe0dd","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/features?ref=version-3","git":"https://api.github.com/repos/aws/aws-sdk-ruby/git/trees/0a3c90b92cc45389352d677745fe5b53823fe0dd","html":"https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-s3/features"}},{"name":"lib","path":"gems/aws-sdk-s3/lib","sha":"c2237d448e37f8775c60b7a950f25f75c0c2fd77","size":0,"url":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/lib?ref=version-3","html_url":"https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-s3/lib","git_url":"https://api.github.com/repos/aws/aws-sdk-ruby/git/trees/c2237d448e37f8775c60b7a950f25f75c0c2fd77","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/lib?ref=version-3","git":"https://api.github.com/repos/aws/aws-sdk-ruby/git/trees/c2237d448e37f8775c60b7a950f25f75c0c2fd77","html":"https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-s3/lib"}},{"name":"spec","path":"gems/aws-sdk-s3/spec","sha":"ab48e2ef0b5127f6812cdd7db689d160760de710","size":0,"url":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/spec?ref=version-3","html_url":"https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-s3/spec","git_url":"https://api.github.com/repos/aws/aws-sdk-ruby/git/trees/ab48e2ef0b5127f6812cdd7db689d160760de710","download_url":null,"type":"dir","_links":{"self":"https://api.github.com/repos/aws/aws-sdk-ruby/contents/gems/aws-sdk-s3/spec?ref=version-3","git":"https://api.github.com/repos/aws/aws-sdk-ruby/git/trees/ab48e2ef0b5127f6812cdd7db689d160760de710","html":"https://github.com/aws/aws-sdk-ruby/tree/version-3/gems/aws-sdk-s3/spec"}}]'
+  recorded_at: Sun, 09 May 2021 19:10:51 GMT
+recorded_with: VCR 6.0.0
