@@ -2,7 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/lock_diff.svg)](https://badge.fury.io/rb/lock_diff)
 ![Build Status](https://github.com/vividmuimui/lock_diff/actions/workflows/ruby.yml/badge.svg)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d05b439bc5064e30ad84ecfa8e57b448)](https://www.codacy.com/app/vividmuimui/lock_diff?utm_source=github.com&utm_medium=referral&utm_content=vividmuimui/lock_diff&utm_campaign=badger)
 [![Code Climate](https://codeclimate.com/github/vividmuimui/lock_diff/badges/gpa.svg)](https://codeclimate.com/github/vividmuimui/lock_diff)
 
 This gem detects changes to your package manager (e.g. Gemfile) and generates a Markdown-formatted diff including:
