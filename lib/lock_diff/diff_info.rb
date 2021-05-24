@@ -63,7 +63,8 @@ module LockDiff
       Github::ChangelogUrlFinder.new(
         repository: package.repository,
         repository_url: package.repository_url,
-        ref: @new_package.ref
+        ref: @new_package.ref,
+        package_name: package.name
       ).call.map do |url|
         Changelog.new(url)
       end

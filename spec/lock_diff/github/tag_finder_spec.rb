@@ -35,8 +35,10 @@ module LockDiff::Github
       },
     ].each do |params|
       specify do
-        tag = TagFinder.new(repository: params[:repository], package_name: params[:package_name], version: params[:version]).call
-        expect(tag).to eq params[:expected]
+        VCR.use_cassette(params[:package_name]) do
+          tag = TagFinder.new(repository: params[:repository], package_name: params[:package_name], version: params[:version]).call
+          expect(tag).to eq params[:expected]
+        end
       end
     end
   end
