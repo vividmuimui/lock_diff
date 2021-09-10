@@ -18,7 +18,8 @@ module LockDiff
         [
           Directory.new(@repository, @ref),
           Directory.new(@repository, @ref, path: @package_name),
-          Directory.new(@repository, @ref, path: "gems/#{@package_name}")
+          Directory.new(@repository, @ref, path: "gems/#{@package_name}"),
+          Directory.new(@repository, @ref, path: 'docs')
         ]
       end
 
