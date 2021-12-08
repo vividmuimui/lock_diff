@@ -4,4 +4,4 @@ require "lock_diff"
 require "lock_diff/cli/option_parser"
 
 options = LockDiff::Cli::OptionParser.parse(ARGV, require_flags: %i(repository number))
-LockDiff.run(options)
+LockDiff.run(**options)
