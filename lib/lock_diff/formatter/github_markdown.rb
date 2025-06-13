@@ -12,10 +12,10 @@ module LockDiff
       end
 
       def call
-        _body = body
-        return unless _body
+        body_content = body
+        return unless body_content
 
-        (headers + _body).join("\n")
+        (headers + body_content).join("\n")
       end
 
       private

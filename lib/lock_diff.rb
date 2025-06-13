@@ -35,7 +35,10 @@ module LockDiff
         LockDiff.logger.info { "Running on repository: #{pr.repository}, number: #{pr.number}" }
         _run(pull_request: pr, post_comment: post_comment)
       else
-        LockDiff.logger.warn("Not found pull request by tachikoma. (Hint: search pull request by whether branch name includes 'tachikoma'")
+        LockDiff.logger.warn(
+          "Not found pull request by tachikoma. " \
+          "(Hint: search pull request by whether branch name includes 'tachikoma'"
+        )
       end
     end
 
