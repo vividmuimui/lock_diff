@@ -30,9 +30,10 @@ module LockDiff
       end
 
       describe ".parse" do
+        subject { described_class.parse(lockfile) }
+
         let(:lockfile) { test_data.lockfile }
 
-        subject { described_class.parse(lockfile) }
         it { is_expected.to all(be_a Spec::Base) }
       end
 

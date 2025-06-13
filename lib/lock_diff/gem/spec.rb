@@ -46,6 +46,7 @@ module LockDiff
         end
 
         def repository_url; end
+
         def ruby_gem_url; end
       end
 
@@ -84,6 +85,7 @@ module LockDiff
       end
 
       def repository_url; end
+
       def ruby_gem_url; end
 
       def to_package
