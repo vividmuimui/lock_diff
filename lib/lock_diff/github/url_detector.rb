@@ -13,7 +13,7 @@ module LockDiff
       end
 
       def call
-        url = @urls.find { |_url| _url.include?("github") }
+        url = @urls.find { |url_item| url_item.include?("github") }
         return unless url
 
         begin

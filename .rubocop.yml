@@ -23,6 +23,32 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - 'Rakefile'
+    - '*.gemspec'
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+Metrics/PerceivedComplexity:
+  Max: 12
+
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+RSpec/LeakyConstantDeclaration:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Exclude:
+    - 'spec/**/*'
 
 RSpec/ExampleLength:
   Max: 20
