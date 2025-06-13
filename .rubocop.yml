@@ -1,3 +1,4 @@
+# RuboCop設定ファイル - Ruby gemプロジェクト用
 require:
   - rubocop-rspec
 
