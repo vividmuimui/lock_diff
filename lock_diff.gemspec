@@ -10,8 +10,10 @@ Gem::Specification.new do |spec|
   spec.authors       = ["vividmuimui"]
   spec.email         = ["vivid.muimui@gmail.com"]
 
-  spec.summary       = "This gem detects changes to your package manager (e.g. Gemfile) and generates a Markdown-formatted diff."
-  spec.description   = "This gem detects changes to your package manager (e.g. Gemfile) and generates a Markdown-formatted diff."
+  spec.summary       = "This gem detects changes to your package manager (e.g. Gemfile) " \
+                       "and generates a Markdown-formatted diff."
+  spec.description   = "This gem detects changes to your package manager (e.g. Gemfile) " \
+                       "and generates a Markdown-formatted diff."
   # spec.homepage      = "https://github.com/vividmuimui/lock_diff"
   spec.homepage      = ""
   spec.license       = "MIT"

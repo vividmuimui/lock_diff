@@ -3,9 +3,15 @@
 module TestData
   class Gem
     FILES = {
-      default: File.read(File.expand_path("#{File.dirname(__FILE__)}/../test_data/lockfile/gemfile_lock/Gemfile.lock.base")),
-      base: File.read(File.expand_path("#{File.dirname(__FILE__)}/../test_data/lockfile/gemfile_lock/Gemfile.lock.base")),
-      head: File.read(File.expand_path("#{File.dirname(__FILE__)}/../test_data/lockfile/gemfile_lock/Gemfile.lock.head"))
+      default: File.read(
+        File.expand_path("#{File.dirname(__FILE__)}/../test_data/lockfile/gemfile_lock/Gemfile.lock.base")
+      ),
+      base: File.read(
+        File.expand_path("#{File.dirname(__FILE__)}/../test_data/lockfile/gemfile_lock/Gemfile.lock.base")
+      ),
+      head: File.read(
+        File.expand_path("#{File.dirname(__FILE__)}/../test_data/lockfile/gemfile_lock/Gemfile.lock.head")
+      )
     }.freeze
 
     attr_reader :lockfile
