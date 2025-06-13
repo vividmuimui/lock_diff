@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require "httpclient"
-require 'ostruct'
-require 'json'
+require "ostruct"
+require "json"
 
 module LockDiff
   module Gem
@@ -31,13 +33,14 @@ module LockDiff
           def find(name)
             ruby_gem = repository[name]
             return ruby_gem if ruby_gem
+
             repository[name] = fetch(name)
           end
 
           def fetch(name)
             content = HTTPClient.get_content("https://rubygems.org/api/v1/gems/#{name}.json")
             OpenStruct.new(JSON.parse(content))
-          rescue => e
+          rescue StandardError => e
             LockDiff.logger.warn("Could not fetch gem info of #{name} because of #{e.inspect}")
             NullRubyGem.new(name)
           end
@@ -47,7 +50,6 @@ module LockDiff
           end
         end
       end
-
     end
 
     class NullRubyGem
@@ -55,15 +57,11 @@ module LockDiff
         @name = name
       end
 
-      def homepage_uri
-      end
+      def homepage_uri; end
 
-      def source_code_uri
-      end
+      def source_code_uri; end
 
-      def project_uri
-      end
-
+      def project_uri; end
     end
   end
 end

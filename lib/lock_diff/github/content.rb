@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LockDiff
   module Github
     # wrapper of Github Content
@@ -28,11 +30,11 @@ module LockDiff
       private
 
       def normalized_name
-        @normalized_name ||= name.downcase.delete('_')
+        @normalized_name ||= name.downcase.delete("_")
       end
 
       def file?
-        @content.type == 'file'
+        @content.type == "file"
       end
     end
   end

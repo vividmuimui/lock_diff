@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
 module LockDiff
   class DiffInfo
     extend Forwardable
 
-    UPGRADE   = 'upgrade'
-    DOWNGRADE = 'downgrade'
-    DELETE    = 'delete'
-    NEW       = 'new'
+    UPGRADE   = "upgrade"
+    DOWNGRADE = "downgrade"
+    DELETE    = "delete"
+    NEW       = "new"
 
     attr_reader :old_package, :new_package
+
     def_delegators :package, :name, :repository_url
     def_delegator :package, :url, :package_url
 
@@ -21,16 +24,15 @@ module LockDiff
     end
 
     def status
-      case
-      when @old_package.version && @new_package.version
+      if @old_package.version && @new_package.version
         if @old_package.version <= @new_package.version
           UPGRADE
         else
           DOWNGRADE
         end
-      when @old_package.version
+      elsif @old_package.version
         DELETE
-      when @new_package.version
+      elsif @new_package.version
         NEW
       end
     end
@@ -47,13 +49,13 @@ module LockDiff
     def status_emoji
       case status
       when UPGRADE
-        ':chart_with_upwards_trend:'
+        ":chart_with_upwards_trend:"
       when DOWNGRADE
-        ':chart_with_downwards_trend:'
+        ":chart_with_downwards_trend:"
       when DELETE
-        ':x:'
+        ":x:"
       when NEW
-        ':new:'
+        ":new:"
       end
     end
 
@@ -72,6 +74,7 @@ module LockDiff
 
     def commits_url
       return unless package.repository_url
+
       old_ref = @old_package.ref
       new_ref = @new_package.ref
       compare_path =
@@ -96,11 +99,10 @@ module LockDiff
       when DOWNGRADE
         "#{@new_package.version_str}...#{@old_package.version_str}"
       when DELETE
-        "#{@old_package.version_str}"
+        @old_package.version_str.to_s
       when NEW
-        "#{@new_package.version_str}"
+        @new_package.version_str.to_s
       end
     end
-
   end
 end

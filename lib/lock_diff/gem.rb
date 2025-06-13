@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "bundler"
 require_relative "gem/lockfile_comparator"
 require_relative "gem/package"
@@ -8,7 +10,7 @@ module LockDiff
   module Gem
     class << self
       def lockfile_name
-        'Gemfile.lock'
+        "Gemfile.lock"
       end
 
       def lockfile_comparator

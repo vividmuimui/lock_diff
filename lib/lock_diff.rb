@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "logger"
 require "forwardable"
 
@@ -30,7 +32,7 @@ module LockDiff
     def run_by_latest_tachikoma(repository:, post_comment: false)
       pr = PullRequest.latest_by_tachikoma(repository)
       if pr
-        LockDiff.logger.info { "Running on repository: #{pr.repository}, number: #{pr.number}"}
+        LockDiff.logger.info { "Running on repository: #{pr.repository}, number: #{pr.number}" }
         _run(pull_request: pr, post_comment: post_comment)
       else
         LockDiff.logger.warn("Not found pull request by tachikoma. (Hint: search pull request by whether branch name includes 'tachikoma'")

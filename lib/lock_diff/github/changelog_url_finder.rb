@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LockDiff
   module Github
     class ChangelogUrlFinder
@@ -19,15 +21,16 @@ module LockDiff
           Directory.new(@repository, @ref),
           Directory.new(@repository, @ref, path: @package_name),
           Directory.new(@repository, @ref, path: "gems/#{@package_name}"),
-          Directory.new(@repository, @ref, path: 'docs')
+          Directory.new(@repository, @ref, path: "docs")
         ]
       end
 
       def find_release_url
         return unless @repository_url
-        unless Github.client.exist_releases?(@repository)
-          @repository_url + "/releases"
-        end
+
+        return if Github.client.exist_releases?(@repository)
+
+        "#{@repository_url}/releases"
       end
     end
   end

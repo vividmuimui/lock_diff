@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LockDiff
   module Gem
     # wrapper of lazy_specification
@@ -14,7 +16,8 @@ module LockDiff
           when Bundler::Source::Path
             PathSpec.new(lazy_specification)
           else
-            raise UnSupportSource, "#{lazy_specification.source.class} source by #{lazy_specification.name} is not supported"
+            raise UnSupportSource,
+                  "#{lazy_specification.source.class} source by #{lazy_specification.name} is not supported"
           end
         end
 
@@ -23,7 +26,6 @@ module LockDiff
             new(lazy_specification)
           end
         end
-
       end
 
       class Base
@@ -75,8 +77,7 @@ module LockDiff
         @name = name
       end
 
-      def revision
-      end
+      def revision; end
 
       def version
         nil
@@ -89,6 +90,5 @@ module LockDiff
         Package.new(self)
       end
     end
-
   end
 end

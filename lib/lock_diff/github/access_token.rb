@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module LockDiff
   module Github
     class AccessToken < ::String
       def initialize(token = nil)
-        super(token || ENV.fetch('GITHUB_ACCESS_TOKEN'))
+        super(token || ENV.fetch("GITHUB_ACCESS_TOKEN"))
       end
     end
   end

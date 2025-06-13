@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LockDiff
   module Gem
     class Package
@@ -31,13 +33,13 @@ module LockDiff
       def git_tag
         return unless version && repository
         return @git_tag if defined? @git_tag
+
         @git_tag = Github::TagFinder.new(
           repository: repository,
           package_name: name,
           version: version
         ).call
       end
-
     end
   end
 end

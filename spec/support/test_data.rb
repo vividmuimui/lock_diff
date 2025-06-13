@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module TestData
   class Gem
     FILES = {
-      default: File.read(File.expand_path(File.dirname(__FILE__) + "/../test_data/lockfile/gemfile_lock/Gemfile.lock.base")),
-      base: File.read(File.expand_path(File.dirname(__FILE__) + "/../test_data/lockfile/gemfile_lock/Gemfile.lock.base")),
-      head: File.read(File.expand_path(File.dirname(__FILE__) + "/../test_data/lockfile/gemfile_lock/Gemfile.lock.head"))
-    }
+      default: File.read(File.expand_path("#{File.dirname(__FILE__)}/../test_data/lockfile/gemfile_lock/Gemfile.lock.base")),
+      base: File.read(File.expand_path("#{File.dirname(__FILE__)}/../test_data/lockfile/gemfile_lock/Gemfile.lock.base")),
+      head: File.read(File.expand_path("#{File.dirname(__FILE__)}/../test_data/lockfile/gemfile_lock/Gemfile.lock.head"))
+    }.freeze
 
     attr_reader :lockfile
 
@@ -21,15 +23,15 @@ module TestData
     end
 
     def sample_git_source
-      lazy_specifications.select { |spec| spec.source.class == Bundler::Source::Git }.sample
+      lazy_specifications.select { |spec| spec.source.instance_of?(Bundler::Source::Git) }.sample
     end
 
     def sample_rubygems_source
-      lazy_specifications.select { |spec| spec.source.class == Bundler::Source::Rubygems }.sample
+      lazy_specifications.select { |spec| spec.source.instance_of?(Bundler::Source::Rubygems) }.sample
     end
 
     def sample_path_source
-      lazy_specifications.select { |spec| spec.source.class == Bundler::Source::Path }.sample
+      lazy_specifications.select { |spec| spec.source.instance_of?(Bundler::Source::Path) }.sample
     end
   end
 end

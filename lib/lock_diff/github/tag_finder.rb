@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LockDiff
   module Github
     class TagFinder
@@ -13,7 +15,7 @@ module LockDiff
 
       private
 
-      def find_tag(page: 1, limit:, per_page:)
+      def find_tag(limit:, per_page:, page: 1)
         return nil if page > limit
 
         fetched_tags = TagsRepository.find(@repository, page: page, per_page: per_page)
@@ -21,9 +23,9 @@ module LockDiff
 
         return tag if tag
 
-        unless fetched_tags.count < per_page
-          find_tag(page: page + 1, limit: limit, per_page: per_page)
-        end
+        return if fetched_tags.count < per_page
+
+        find_tag(page: page + 1, limit: limit, per_page: per_page)
       end
 
       def match_rule?(tag_name)
@@ -41,11 +43,12 @@ module LockDiff
             key = "#{repo_name}-#{options[:page]}"
             ruby_gem = repository[key]
             return ruby_gem if repository.key?(key)
+
             repository[key] = fetch(repo_name, options)
           end
 
           def fetch(repo_name, options = {})
-            LockDiff.logger.debug { "Fetch tags #{repo_name}, #{options}"}
+            LockDiff.logger.debug { "Fetch tags #{repo_name}, #{options}" }
             Github.client.tag_names(repo_name, options)
           end
 
@@ -54,7 +57,6 @@ module LockDiff
           end
         end
       end
-
     end
   end
 end

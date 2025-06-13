@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LockDiff
   module Formatter
     class GithubMarkdown
@@ -11,9 +13,9 @@ module LockDiff
 
       def call
         _body = body
-        if _body
-          (headers + _body).join("\n")
-        end
+        return unless _body
+
+        (headers + _body).join("\n")
       end
 
       private
@@ -65,7 +67,7 @@ module LockDiff
           if diff_info.repository_url
             "[:octocat:](#{diff_info.repository_url})"
           else
-            ''
+            ""
           end
         end
 

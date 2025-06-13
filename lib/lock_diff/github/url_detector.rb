@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require "httpclient"
 
 module LockDiff
   module Github
     class UrlDetector
       # xxx.github.aaa/yyyy
-      REGEXP = %r!https?://([^/]+)\.github\.[^/]+/([^/]+)!
+      REGEXP = %r{https?://([^/]+)\.github\.[^/]+/([^/]+)}.freeze
 
       def initialize(urls)
         @urls = Array(urls).compact
@@ -17,7 +19,7 @@ module LockDiff
         begin
           response = HTTPClient.get(url, follow_redirect: true)
           url = response.header.request_uri.to_s
-        rescue
+        rescue StandardError
           repository = RepositoryNameDetector.new(url).call
           url = "https://github.com/#{repository}"
         end
@@ -30,7 +32,7 @@ module LockDiff
           repository = RepositoryNameDetector.new(url).call
           "https://github.com/#{repository}"
         end
-      rescue => e
+      rescue StandardError => e
         LockDiff.logger.warn("Could not detect github url by #{url} because of #{e.inspect}")
         nil
       end

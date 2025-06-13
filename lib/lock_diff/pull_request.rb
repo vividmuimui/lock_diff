@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LockDiff
   class PullRequest
     extend Forwardable
@@ -6,10 +8,10 @@ module LockDiff
     class << self
       def find_by(repository:, number:)
         client.pull_request(repository, number)
-      rescue => e
+      rescue StandardError => e
         message = "Not found pull request by (repository: #{repository}, number: #{number}, client: #{client.class}). Becase of #{e.inspect}"
         LockDiff.logger.warn(message)
-        raise NotFoundPullRequest.new(message)
+        raise NotFoundPullRequest, message
       end
 
       def latest_by_tachikoma(repository)
@@ -25,6 +27,5 @@ module LockDiff
         LockDiff.config.pr_repository_service.client
       end
     end
-
   end
 end

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require "bundler/setup"
 require "lock_diff"
 require "vcr"
-Dir[File.expand_path(File.dirname(__FILE__) + "/support/**/*.rb")].each(&method(:require))
+Dir[File.expand_path("#{File.dirname(__FILE__)}/support/**/*.rb")].sort.each(&method(:require))
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -20,7 +22,7 @@ end
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.hook_into :webmock
-  config.filter_sensitive_data('<TOKEN>') { ENV.fetch('GITHUB_ACCESS_TOKEN') }
+  config.filter_sensitive_data("<TOKEN>") { ENV.fetch("GITHUB_ACCESS_TOKEN") }
 end
 
 LockDiff.logger.level = :debug

@@ -1,4 +1,6 @@
-require 'octokit'
+# frozen_string_literal: true
+
+require "octokit"
 
 module LockDiff
   module Github
@@ -25,23 +27,25 @@ module LockDiff
       end
 
       def newer_pull_requests(repository)
-        @client.pull_requests(repository).
-          map { |pull_request| Github::PullRequest.new(pull_request) }
+        @client.pull_requests(repository)
+               .map { |pull_request| Github::PullRequest.new(pull_request) }
       end
 
       def pull_request_content_path(repository, number, file_name)
-        content = @client.pull_request_files(repository, number).
-          find { |file| file.filename.include?(file_name) }
+        content = @client.pull_request_files(repository, number)
+                         .find { |file| file.filename.include?(file_name) }
         content&.filename
       end
 
       def exist_releases?(repository)
         return false unless repository
+
         @client.releases(repository).empty?
       end
 
       def contents(repository, options = {})
         return [] unless repository
+
         @client.contents(repository, options).map do |content|
           Content.new(content)
         end
@@ -49,13 +53,13 @@ module LockDiff
 
       def tag_names(repository, options = {})
         return [] unless repository
+
         @client.tags(repository, options).map(&:name)
       end
 
       def add_comment(repository, number, comment)
         @client.add_comment(repository, number, comment)
       end
-
     end
   end
 end

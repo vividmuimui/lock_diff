@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "github/access_token"
 require_relative "github/changelog_url_finder"
 require_relative "github/client"

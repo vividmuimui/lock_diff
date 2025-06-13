@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "optparse"
 
 module LockDiff
@@ -21,14 +23,14 @@ module LockDiff
 
         opt.separator("Require flags")
         if @require_flags.include? :repository
-          opt.on('-r', '--repository=REPOSITORY', 'Like as "user/repository"') { |v| options[:repository] = v }
+          opt.on("-r", "--repository=REPOSITORY", 'Like as "user/repository"') { |v| options[:repository] = v }
         end
-        if @require_flags.include? :number
-          opt.on('-n', '--number=PULL_REQUEST_NUMBER') { |v| options[:number] = v }
-        end
+        opt.on("-n", "--number=PULL_REQUEST_NUMBER") { |v| options[:number] = v } if @require_flags.include? :number
 
         opt.separator("\nOptional flags")
-        opt.on('--post-comment=true or false', 'Print result to stdout when false. (default is false)') { |v| options[:post_comment] = v }
+        opt.on("--post-comment=true or false", "Print result to stdout when false. (default is false)") do |v|
+          options[:post_comment] = v
+        end
         opt.on("-v", "--verbose", "Run verbosely") { LockDiff.logger.level = :info }
         opt.on("--more-verbose", "Run more verbosely") { LockDiff.logger.level = :debug }
         opt.on_tail("--version", "Show version") do
@@ -44,7 +46,6 @@ module LockDiff
           exit
         end
       end
-
     end
   end
 end
